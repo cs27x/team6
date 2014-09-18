@@ -1,11 +1,10 @@
 Create Data structures on first run
 	- Restaurant
 		- Private instance variables
-			- Name
-			- On/Off Campus
-			- Meal plan/money
-			- Lat
-			- Long.
+			- Name : String
+			- Meal plan/money : Bool
+			- Lat : Double
+			- Long : Double
 			- Hours
 				- Array of open and close times for each week
 			- Type of food
@@ -16,7 +15,6 @@ Create Data structures on first run
 			- isMealPlan
 			- distanceToLocation(GPS lat and longitude)
 			- hasDelivery
-			- isOnCampus
 			- typeOfFood
 			- getHours
 			- timeToClose
@@ -36,7 +34,6 @@ Create Data structures on first run
 				- Open
 				- On meal plan
 				- Food type
-				- On Campus
 
 
 2 - Database
@@ -62,6 +59,7 @@ Create Data structures on first run
 	2. Android api to figure out distance between two locations
 	3. Work with storage team to create the sort by location method
 
+#User Stories
 1. I want to be able to see, at a glance, the closest places where I can use my meal plan.
 2. I would like to be able to filter (on/off-campus, meal plan/money, open now, type of food, delivery optionÉ) and sort (distance, price, closing soonÉ) a list of Vanderbilt dining locations.
 3. As someone who doesnÕt like cafeteria food, I would like to know which restaurants are on the vandy card.
