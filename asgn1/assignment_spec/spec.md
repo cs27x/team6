@@ -6,6 +6,7 @@
 - Jeremey Key
 - Xiaochen Yang
 - Clark Perkins
+- Alex Wan
 
 ##Overview
 Create an application to find the nearest place to buy beer and offer a place to
