@@ -1,39 +1,40 @@
 Create Data structures on first run
-	- Restaurant
-		- Private instance variables
-			- Name : String
-			- Meal plan/money : Bool
-			- Lat : Double
-			- Long : Double
-			- Hours
-				- Array of open and close times for each week
-			- Type of food
-		- Public Methods
-			- isOpen
-				- No arguments returns if its opened now
-				- With a datetime as an argument it will return if it will be open at that time
-			- isMealPlan
-			- distanceToLocation(GPS lat and longitude)
-			- hasDelivery
-			- typeOfFood
-			- getHours
-			- timeToClose
+##Restaurant
+
+###Private instance variables
+- Name : String
+- Meal plan/money : Bool
+- Lat : Double
+- Long : Double
+- Hours
+	- Array of open and close times for each week
+- Type of food
+
+###Public Methods
+- isOpen
+	- No arguments returns if its opened now
+	- With a datetime as an argument it will return if it will be open at that time
+- isMealPlan
+- distanceToLocation(GPS lat and longitude)
+- hasDelivery
+- typeOfFood
+- getHours
+- timeToClose
 
 
-	- All the fields should be populated from local database.
-	- RestaurantList
-		- List of all the available restaurants that are created when the application is launched
-		- Singleton class that should be accessible from anywhere within the application
-		- Has methods for getting Restaurants with the different sort and filters
-			- Sort
-				- Distance from current location
-					- Use the Latitude and longitude stored for each restaurant and compare this to current location
-					- Return a sorted list of the restaurants
-				- Sort by time to close
-			- Filters
-				- Open
-				- On meal plan
-				- Food type
+##RestaurantList
+- List of all the available restaurants that are created when the application is launched
+	- Singleton class that should be accessible from anywhere within the application
+	- Has methods for getting Restaurants with the different sort and filters
+- Sort
+	- Distance from current location
+		- Use the Latitude and longitude stored for each restaurant and compare this to current location
+		- Return a sorted list of the restaurants
+	- Sort by time to close
+- Filters
+	- Open
+	- On meal plan
+	- Food type
 
 
 2 - Database
