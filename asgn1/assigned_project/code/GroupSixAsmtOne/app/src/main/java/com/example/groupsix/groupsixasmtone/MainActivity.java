@@ -16,7 +16,7 @@ import android.widget.SimpleAdapter;
 import android.widget.Spinner;
 
 public class MainActivity extends ListActivity {
-	ArrayList<Object> restaurants;
+	ArrayList<String> restaurants;
 	ListView listViewRestaurants;
 	Spinner spinnerSorting;
 	Spinner spinnerFilter;
@@ -25,6 +25,7 @@ public class MainActivity extends ListActivity {
 	SimpleAdapter listViewAdapter;
 	
 	static final ArrayList<HashMap<String,String>> list = new ArrayList<HashMap<String,String>>();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,7 +38,7 @@ public class MainActivity extends ListActivity {
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 Object restaurant = restaurants.get(i);
                 Intent intent = new Intent(getBaseContext(), MyActivity.class);
-                intent.putExtra("restaurant", restaurant);
+//                intent.putExtra("restaurant", restaurant);
                 startActivity(intent);
             }
         });
