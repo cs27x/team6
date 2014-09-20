@@ -17,8 +17,12 @@ public class restaurant_class {
 	
 	Date date = new Date();
 	Calendar now = Calendar.getInstance();
+<<<<<<< HEAD
 	private final int[] opentimes = new int [7]; // First element is Monday open time
 	// Last element is Monday close time
+=======
+	private final int[] opentimes = new int [7];
+>>>>>>> d3dc807ecf407bcd5d4fd93173e92c47985fb76b
 	private final int[] closingtimes = new int [7];
 
 	public boolean isOpen()
@@ -28,8 +32,11 @@ public class restaurant_class {
 		int openingtime = opentimes[today];
 		int closingtime = closingtimes[today];
 		
+<<<<<<< HEAD
 		if (openingtime >= 0)
 		{
+=======
+>>>>>>> d3dc807ecf407bcd5d4fd93173e92c47985fb76b
 		int from = openingtime;
 	    int to = closingtime;
 	    Date date = new Date();
@@ -39,14 +46,18 @@ public class restaurant_class {
 	    boolean isBetween = to > from && t >= from && t <= to || to < from && (t >= from || t <= to);
 		
 		return isBetween;
+<<<<<<< HEAD
 		}
 		else
 			return false;
+=======
+>>>>>>> d3dc807ecf407bcd5d4fd93173e92c47985fb76b
 	}
 	
 	public boolean isOpen(int day)
 	{
 		// Checks to see if restaurant is open at specified day
+<<<<<<< HEAD
 				
 				int openingtime = opentimes[day];
 				
@@ -67,6 +78,20 @@ public class restaurant_class {
 				}
 				else
 					return false;
+=======
+				int openingtime = opentimes[day];
+				int closingtime = closingtimes[day];
+				
+				int from = openingtime;
+			    int to = closingtime;
+			    Date date = new Date();
+			    Calendar c = Calendar.getInstance();
+			    c.setTime(date);
+			    int t = c.get(Calendar.HOUR_OF_DAY) * 100 + c.get(Calendar.MINUTE);
+			    boolean isBetween = to > from && t >= from && t <= to || to < from && (t >= from || t <= to);
+				
+				return isBetween;
+>>>>>>> d3dc807ecf407bcd5d4fd93173e92c47985fb76b
 	}
 	
 	public int[] getTimes()
@@ -96,7 +121,11 @@ public class restaurant_class {
 	
 	public boolean isonCampus()
 	{
+<<<<<<< HEAD
 		return oncampus;
+=======
+		return true;
+>>>>>>> d3dc807ecf407bcd5d4fd93173e92c47985fb76b
 	}
 	
 	public String typeOfFood()
@@ -119,6 +148,10 @@ public class restaurant_class {
 		    return timetoclose;
 		}
 		else
+<<<<<<< HEAD
 			return -1;
+=======
+			return 0;
+>>>>>>> d3dc807ecf407bcd5d4fd93173e92c47985fb76b
 	}
 }
