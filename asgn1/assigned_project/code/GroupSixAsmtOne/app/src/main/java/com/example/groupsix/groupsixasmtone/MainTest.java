@@ -8,7 +8,7 @@ public class MainTest {
 
     public static void main(String[] args) {
 
-        Restaurants r = new Restaurants();
+        RestaurantList r = new RestaurantList();
 
 
         System.out.println(r.toString());

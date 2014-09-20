@@ -14,15 +14,15 @@ import java.util.*;
 
 
 
-public class Restaurants extends ArrayList<Restaurant> {
+public class RestaurantList extends ArrayList<Restaurant> {
 
     private final String FILENAME = "test.json";
 
-    public Restaurants() {
+    public RestaurantList() {
         this(true);
     }
 
-    private Restaurants(boolean loadData) {
+    private RestaurantList(boolean loadData) {
         super();
         if (loadData) {
             // Load the data from the data source, either JSON file or server
@@ -34,8 +34,8 @@ public class Restaurants extends ArrayList<Restaurant> {
      * Get an empty restaurant list
      * @return the empty list
      */
-    public static Restaurants getEmptyRestaurants() {
-        return new Restaurants(false);
+    public static RestaurantList getEmptyList() {
+        return new RestaurantList(false);
     }
 
     /**
@@ -68,8 +68,8 @@ public class Restaurants extends ArrayList<Restaurant> {
      * Get a List of Restaurant objects that are currently open
      * @return the list of Restaurant objects
      */
-    public Restaurants getOpen() {
-        Restaurants ret = getEmptyRestaurants();
+    public RestaurantList getOpen() {
+        RestaurantList ret = getEmptyList();
 
         for (Restaurant r : this) {
             if (r.isOpen()) {
@@ -85,8 +85,8 @@ public class Restaurants extends ArrayList<Restaurant> {
      *
      * @return
      */
-    public Restaurants getMealPlan() {
-        Restaurants ret = getEmptyRestaurants();
+    public RestaurantList getMealPlan() {
+        RestaurantList ret = getEmptyList();
 
         for (Restaurant r : this) {
             if (r.getMealPlanType().equals("Meal Plan")) {
@@ -98,8 +98,8 @@ public class Restaurants extends ArrayList<Restaurant> {
         return ret;
     }
 
-    public Restaurants getByFoodType(String type) {
-        Restaurants ret = getEmptyRestaurants();
+    public RestaurantList getByFoodType(String type) {
+        RestaurantList ret = getEmptyList();
 
         for (Restaurant r : this) {
             if (r.getFoodType().equals(type)) {
@@ -111,8 +111,8 @@ public class Restaurants extends ArrayList<Restaurant> {
         return ret;
     }
 
-    public Restaurants getToN() {
-        Restaurants ret = getEmptyRestaurants();
+    public RestaurantList getToN() {
+        RestaurantList ret = getEmptyList();
 
         for (Restaurant r : this) {
             if (r.getMealPlanType().equals("Taste of Nashville")) {
@@ -128,8 +128,16 @@ public class Restaurants extends ArrayList<Restaurant> {
         Collections.sort(this, new RestaurantDistanceComparator(lat, lon));
     }
 
-    public void sortByTime(int hours, int minutes, int seconds) {
-        Collections.sort(this, new RestaurantTimeComparator(hours, minutes, seconds));
+    public void sortByTime() {
+        Date date = new Date();
+        Calendar calendar = GregorianCalendar.getInstance();
+        calendar.setTime(date);
+
+        int hours = calendar.get(Calendar.HOUR_OF_DAY);
+        int minutes = calendar.get(Calendar.MINUTE);
+        int day = calendar.get(Calendar.DAY_OF_WEEK);
+
+        Collections.sort(this, new RestaurantTimeComparator(day, hours, minutes));
     }
 
     private class RestaurantDistanceComparator implements Comparator<Restaurant> {
@@ -159,14 +167,14 @@ public class Restaurants extends ArrayList<Restaurant> {
 
     private class RestaurantTimeComparator implements Comparator<Restaurant> {
 
+        private int day;
         private int hours;
         private int minutes;
-        private int seconds;
 
-        public RestaurantTimeComparator(int hours, int minutes, int seconds) {
+        public RestaurantTimeComparator(int day, int hours, int minutes) {
+            this.day = day;
             this.hours = hours;
             this.minutes = minutes;
-            this.seconds = seconds;
         }
 
         @Override
