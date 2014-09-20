@@ -71,23 +71,18 @@ public class Restaurants extends ArrayList<Restaurant> {
     public Restaurants getOpen() {
         Restaurants ret = getEmptyRestaurants();
 
-        Date date = new Date();
-        Calendar calendar = GregorianCalendar.getInstance();
-        calendar.setTime(date);
-        int hour = calendar.get(Calendar.HOUR_OF_DAY);
-        int minute = calendar.get(Calendar.MINUTE);
-        int second = calendar.get(Calendar.SECOND);
-
         for (Restaurant r : this) {
-            // Add a copy
-            ret.add(new Restaurant(r));
+            if (r.isOpen()) {
+                // Add a copy
+                ret.add(new Restaurant(r));
+            }
         }
 
         return ret;
     }
 
     /**
-     * 
+     *
      * @return
      */
     public Restaurants getMealPlan() {
@@ -149,7 +144,16 @@ public class Restaurants extends ArrayList<Restaurant> {
 
         @Override
         public int compare(Restaurant restaurant, Restaurant restaurant2) {
-            return 0;
+            double r1 = restaurant.getDistanceFrom(lat, lon);
+            double r2 = restaurant2.getDistanceFrom(lat, lon);
+
+            if (r1 < r2) {
+                return -1;
+            } else if (r1 > r2) {
+                return 1;
+            } else {
+                return 0;
+            }
         }
     }
 

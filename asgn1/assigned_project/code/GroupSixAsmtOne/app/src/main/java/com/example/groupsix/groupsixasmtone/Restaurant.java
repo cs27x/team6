@@ -55,6 +55,10 @@ public class Restaurant {
         return 0;
     }
 
+    public boolean isOpen() {
+        return false;
+    }
+
     public String getName() {
         return name;
     }
