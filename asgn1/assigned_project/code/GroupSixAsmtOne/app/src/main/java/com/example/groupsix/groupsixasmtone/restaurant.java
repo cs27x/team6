@@ -1,25 +1,37 @@
-package restaurant_class;
+package com.example.groupsix.groupsixasmtone;
 
 import java.util.Date;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
-public class restaurant_class {
-	
-	private final String name = "";
-	private final String typeoffood = "";
-	private final Boolean oncampus = false;
-	private final Boolean mealmoney = false;
-	private final Boolean delivers = false;
-	private final float latitude = 0;
-	private final float longitude = 0;	
+public class Restaurant {
+// Need constructor and set methods
+
+	private String name;
+	private String typeoffood;
+	private boolean oncampus;
+	private boolean mealmoney;
+	private boolean delivers;
+	private float latitude;
+	private float longitude;
 	
 	Date date = new Date();
 	Calendar now = Calendar.getInstance();
-	private final int[] opentimes = new int [7]; // First element is Monday open time
+	private int[] opentimes = new int [7]; // First element is Monday open time
 	// Last element is Monday close time
-	private final int[] closingtimes = new int [7];
+	private int[] closingtimes = new int [7];
+
+    public Restaurant()
+    {
+        name = "";
+        typeoffood = "";
+        oncampus = false;
+        mealmoney = false;
+        delivers = false;
+        latitude = 0;
+        longitude = 0;
+    }
 
 	public boolean isOpen()
 	{
@@ -82,7 +94,7 @@ public class restaurant_class {
 		return times;
 	}
 	
-
+    // Getter methods
 	
 	public boolean isMealPlan()
 	{
@@ -121,4 +133,42 @@ public class restaurant_class {
 		else
 			return -1;
 	}
+
+    // Setter methods
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setTypeoffood(String typeoffood) {
+        this.typeoffood = typeoffood;
+    }
+
+    public void setOncampus(boolean oncampus) {
+        this.oncampus = oncampus;
+    }
+
+    public void setMealmoney(boolean mealmoney) {
+        this.mealmoney = mealmoney;
+    }
+
+    public void setDelivers(boolean delivers) {
+        this.delivers = delivers;
+    }
+
+    public void setLatitude(float latitude) {
+        this.latitude = latitude;
+    }
+
+    public void setLongitude(float longitude) {
+        this.longitude = longitude;
+    }
+
+    public void setOpentimes(int[] opentimes) {
+        this.opentimes = opentimes;
+    }
+
+    public void setClosingtimes(int[] closingtimes) {
+        this.closingtimes = closingtimes;
+    }
 }
