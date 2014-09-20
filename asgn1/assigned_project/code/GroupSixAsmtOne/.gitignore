@@ -1,5 +1,55 @@
-.gradle
-/local.properties
-.idea/
+# OSX
 .DS_Store
-/build
+
+# Local configuration
+local.properties
+
+## IntelliJ (JetBrains) ignored files (github reccomended)
+
+# User-specific stuff:
+.idea/workspace.xml
+.idea/tasks.xml
+.idea/dictionaries/
+
+# Sensitive or high-churn files:
+.idea/dataSources.ids
+.idea/dataSources.xml
+.idea/sqlDataSources.xml
+.idea/dynamic.xml
+.idea/uiDesigner.xml
+
+# Gradle:
+.gradle/
+build/
+.idea/gradle.xml
+.idea/libraries/
+
+# Mongo Explorer plugin:
+.idea/mongoSettings.xml
+
+# JIRA plugin
+atlassian-ide-plugin.xml
+
+## File-based project format:
+*.ipr
+*.iws
+
+
+# Java (just to be safe)
+
+# Built application files
+*.apk
+*.ap_
+
+# Files for the Dalvik VM
+*.dex
+
+# Java class files
+*.class
+
+# Generated files
+bin/
+gen/
+
+# Log files
+*.log
