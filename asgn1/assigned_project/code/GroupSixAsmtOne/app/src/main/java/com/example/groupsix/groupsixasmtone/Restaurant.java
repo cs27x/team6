@@ -18,10 +18,11 @@ public class Restaurant {
 	
 	Date date = new Date();
 	Calendar now = Calendar.getInstance();
-	private int[] opentimes = new int [7]; // First element is Monday open time
+	private int[] opentimes; // First element is Monday open time
 	// Last element is Monday close time
-	private int[] closingtimes = new int [7];
+	private int[] closingtimes;
 
+    // Default constructor
     public Restaurant()
     {
         name = "";
@@ -31,6 +32,30 @@ public class Restaurant {
         delivers = false;
         latitude = 0;
         longitude = 0;
+        opentimes = new int [7];
+        closingtimes = new int [7];
+    }
+
+    // Constructor using JSON loaded parameters
+    public Restaurant(String Name,
+            String TypeOfFood,
+            Boolean OnCampus,
+            Boolean MealMoney,
+            Boolean Delivers,
+            float Latitude,
+            float Longitude,
+            int[] Opentimes,
+            int[] Closingtimes)
+    {
+        name = Name;
+        typeoffood = TypeOfFood;
+        oncampus = OnCampus;
+        mealmoney = MealMoney;
+        delivers = Delivers;
+        latitude = Latitude;
+        longitude = Longitude;
+        opentimes = Opentimes;
+        closingtimes = Closingtimes;
     }
 
 	public boolean isOpen()
@@ -134,7 +159,7 @@ public class Restaurant {
 			return -1;
 	}
 
-    // Setter methods
+/*    // Setter methods
 
     public void setName(String name) {
         this.name = name;
@@ -170,5 +195,5 @@ public class Restaurant {
 
     public void setClosingtimes(int[] closingtimes) {
         this.closingtimes = closingtimes;
-    }
+    }*/
 }
