@@ -1,5 +1,6 @@
 package com.example.groupsix.groupsixasmtone;
 
+import java.util.Arrays;
 import java.util.Date;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
@@ -32,6 +33,18 @@ public class Restaurant {
         longitude = 0;
         openTimes = new int[7];
         closingTimes = new int[7];
+    }
+
+    public Restaurant(Restaurant other) {
+        this.name = other.name;
+        this.foodType = other.foodType;
+        this.onCampus = other.onCampus;
+        this.mealMoney = other.mealMoney;
+        this.delivers = other.delivers;
+        this.latitude = other.latitude;
+        this.longitude = other.longitude;
+        this.openTimes = Arrays.copyOf(other.openTimes, other.openTimes.length);
+        this.closingTimes = Arrays.copyOf(other.closingTimes, other.closingTimes.length);
     }
 
     private static Calendar getCurrentCalendar() {
@@ -99,6 +112,10 @@ public class Restaurant {
         }
     }
 
+    public float getDistanceFrom(float lat, float lon) {
+        return 0;
+    }
+
     // Getter methods
 
 
@@ -118,7 +135,7 @@ public class Restaurant {
         return onCampus;
     }
 
-    public String typeOfFood() {
+    public String getFoodType() {
         return foodType;
     }
 
