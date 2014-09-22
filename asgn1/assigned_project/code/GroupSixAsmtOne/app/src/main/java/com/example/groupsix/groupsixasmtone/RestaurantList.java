@@ -89,7 +89,7 @@ public class RestaurantList extends ArrayList<Restaurant> {
         RestaurantList ret = getEmptyList();
 
         for (Restaurant r : this) {
-            if (r.getMealPlanType().equals("Meal Plan")) {
+            if (r.isMealPlan()) {
                 // Add a copy
                 ret.add(new Restaurant(r));
             }
@@ -102,7 +102,7 @@ public class RestaurantList extends ArrayList<Restaurant> {
         RestaurantList ret = getEmptyList();
 
         for (Restaurant r : this) {
-            if (r.getFoodType().equals(type)) {
+            if (Arrays.asList(r.getFoodType().split(",")).contains(type)) {
                 // Add a copy
                 ret.add(new Restaurant(r));
             }
@@ -115,7 +115,7 @@ public class RestaurantList extends ArrayList<Restaurant> {
         RestaurantList ret = getEmptyList();
 
         for (Restaurant r : this) {
-            if (r.getMealPlanType().equals("Taste of Nashville")) {
+            if (!r.isonCampus()) {
                 // Add a copy
                 ret.add(new Restaurant(r));
             }
@@ -124,7 +124,7 @@ public class RestaurantList extends ArrayList<Restaurant> {
         return ret;
     }
 
-    public void sortByDistance(double lat, double lon) {
+    public void sortByDistance(float lat, float lon) {
         Collections.sort(this, new RestaurantDistanceComparator(lat, lon));
     }
 
@@ -142,18 +142,18 @@ public class RestaurantList extends ArrayList<Restaurant> {
 
     private class RestaurantDistanceComparator implements Comparator<Restaurant> {
 
-        private double lat;
-        private double lon;
+        private float lat;
+        private float lon;
 
-        public RestaurantDistanceComparator(double lat, double lon) {
+        public RestaurantDistanceComparator(float lat, float lon) {
             this.lat = lat;
             this.lon = lon;
         }
 
         @Override
         public int compare(Restaurant restaurant, Restaurant restaurant2) {
-            double r1 = restaurant.getDistanceFrom(lat, lon);
-            double r2 = restaurant2.getDistanceFrom(lat, lon);
+            float r1 = restaurant.getDistanceFrom(lat, lon);
+            float r2 = restaurant2.getDistanceFrom(lat, lon);
 
             if (r1 < r2) {
                 return -1;
@@ -179,7 +179,7 @@ public class RestaurantList extends ArrayList<Restaurant> {
 
         @Override
         public int compare(Restaurant restaurant, Restaurant restaurant2) {
-            return 0;
+            return restaurant.timeToClose() - restaurant2.timeToClose();
         }
     }
 }

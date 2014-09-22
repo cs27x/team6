@@ -1,18 +1,152 @@
-[{
-  "name": "pub",
-  "latitude": "0",
-  "longitude": "0",
-  "openHour": 11,
-  "openMinute": 0,
-  "closeHour": 8,
-  "closeMinute": 0
-},
-{
-  "name": "rand",
-  "latitude": "0",
-  "longitude": "0",
-  "openHour": 8,
-  "openMinute": 0,
-  "closeHour": 6,
-  "closeMinute": 0
-}]
+[
+    {
+        "name": "Rand Dining Center",
+        "foodType": "Tex Mex,American",
+        "onCampus": true,
+        "mealMoney": true,
+        "delivers": false,
+        "latitude": "0",
+        "longitude": "0",
+        "openTimes": [
+            420, 420, 420, 420, 420, 600, 600
+        ],
+        "closingTimes": [
+            900, 1170, 1170, 900, 900, 840, 840
+        ]
+    },
+    {
+        "name": "Chef James",
+        "foodType": "American",
+        "onCampus": true,
+        "mealMoney": true,
+        "delivers": false,
+        "latitude": "0",
+        "longitude": "0",
+        "openTimes": [
+            660, 660, 660, 660, 660, -1, 990
+        ],
+        "closingTimes": [
+            1170, 1170, 1170, 1170, 900, -1, 1170
+        ]
+    },
+    {
+        "name": "Pi and Leaf",
+        "foodType": "Pizza,Salad",
+        "onCampus": true,
+        "mealMoney": true,
+        "delivers": false,
+        "latitude": "0",
+        "longitude": "0",
+        "openTimes": [
+            660, 660, 660, 660, 660, 1020, 1020
+        ],
+        "closingTimes": [
+            1260, 1260, 1260, 1260, 1260, 1260, 1260
+        ]
+    },
+    {
+        "name": "The Commons",
+        "foodType": "Pizza,Salad,American",
+        "onCampus": true,
+        "mealMoney": true,
+        "delivers": false,
+        "latitude": "0",
+        "longitude": "0",
+        "openTimes": [
+            420, 420, 420, 420, 420, 600, 600
+        ],
+        "closingTimes": [
+            1200, 1200, 1200, 1200, 1200, 1200, 1200
+        ]
+    },
+    {
+        "name": "The Pub at Overcup Oak",
+        "foodType": "American",
+        "onCampus": true,
+        "mealMoney": true,
+        "delivers": false,
+        "latitude": "0",
+        "longitude": "0",
+        "openTimes": [
+            660, 660, 660, 660, 660, -1, 660
+        ],
+        "closingTimes": [
+            1260, 1260, 1260, 1260, 1200, -1, 1260
+        ]
+    },
+    {
+        "name": "Last Drop Coffee Shop",
+        "foodType": "Coffee,Pastries",
+        "onCampus": true,
+        "mealMoney": true,
+        "delivers": false,
+        "latitude": "0",
+        "longitude": "0",
+        "openTimes": [
+            420, 420, 420, 420, 420, -1, 900
+        ],
+        "closingTimes": [
+            1260, 1260, 1260, 1260, 900, -1, 1260
+        ]
+    },
+    {
+        "name": "Rocket Subs",
+        "foodType": "Italian",
+        "onCampus": true,
+        "mealMoney": true,
+        "delivers": false,
+        "latitude": "0",
+        "longitude": "0",
+        "openTimes": [
+            660, 660, 660, 660, 660, -1, 840
+        ],
+        "closingTimes": [
+            1320, 1320, 1320, 1320, 900, -1, 1320
+        ]
+    },
+    {
+        "name": "Ro*Tiki",
+        "foodType": "Italian",
+        "onCampus": true,
+        "mealMoney": true,
+        "delivers": false,
+        "latitude": "0",
+        "longitude": "0",
+        "openTimes": [
+            660, 660, 660, 660, 660, -1, -1
+        ],
+        "closingTimes": [
+            1320, 1320, 1320, 1320, 900, -1, -1
+        ]
+    },
+    {
+        "name": "The Kitchen (Kissam)",
+        "foodType": "American",
+        "onCampus": true,
+        "mealMoney": true,
+        "delivers": false,
+        "latitude": "0",
+        "longitude": "0",
+        "openTimes": [
+            450, 450, 450, 450, 450, -1, 1080
+        ],
+        "closingTimes": [
+            1200, 1200, 1200, 1200, 570, -1, 1200
+        ]
+    },
+    {
+        "name": "Quiznos Sub",
+        "foodType": "Tex Mex,American",
+        "onCampus": true,
+        "mealMoney": true,
+        "delivers": false,
+        "latitude": "0",
+        "longitude": "0",
+        "openTimes": [
+            600, 600, 600, 600, 600, 600, 600
+        ],
+        "closingTimes": [
+            1380, 1380, 1380, 1380, 1380, 1380, 1380
+        ]
+    }
+]

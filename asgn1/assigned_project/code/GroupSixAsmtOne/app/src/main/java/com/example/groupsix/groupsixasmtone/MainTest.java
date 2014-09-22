@@ -8,10 +8,11 @@ public class MainTest {
 
     public static void main(String[] args) {
 
-        RestaurantList r = new RestaurantList();
+        RestaurantList rl = new RestaurantList();
 
-
-        System.out.println(r.toString());
+        for (Restaurant r : rl) {
+            System.out.println(r.toString());
+        }
 
     }
 }
