@@ -83,24 +83,28 @@ public class Restaurant {
 //            return false;
     }
 
-    /**
-     * Returns an array of open and close times for today
-     * in integer format (military time)
-     * @return
-     */
-    public int[] getTimes() {
-
+    public int timeToClose() {
         Calendar now = getCurrentCalendar();
 
-        int[] times = new int[2];
+        if (isOpen()) {
+            int today = now.get(Calendar.DAY_OF_WEEK);
+            int closingtime = closingTimes[today];
 
-        int today = now.get(Calendar.DAY_OF_WEEK);
-        times[0] = openTimes[today];
-        times[1] = closingTimes[today];
-        return times;
+            int to = closingtime;
+            int t = now.get(Calendar.HOUR_OF_DAY) * 60 + now.get(Calendar.MINUTE);
+            int timetoclose = to - t;
+            return timetoclose;
+        } else {
+            return -1;
+        }
     }
 
     // Getter methods
+
+
+    public String getName() {
+        return name;
+    }
 
     public boolean isMealPlan() {
         return mealMoney;
@@ -118,20 +122,29 @@ public class Restaurant {
         return foodType;
     }
 
-    public int timeToClose() {
+    public float getLongitude() {
+        return longitude;
+    }
+
+    public float getLatitude() {
+        return latitude;
+    }
+
+    /**
+     * Returns an array of open and close times for today
+     * in integer format (military time)
+     * @return
+     */
+    public int[] getTimes() {
+
         Calendar now = getCurrentCalendar();
 
-        if (isOpen()) {
-            int today = now.get(Calendar.DAY_OF_WEEK);
-            int closingtime = closingTimes[today];
+        int[] times = new int[2];
 
-            int to = closingtime;
-            int t = now.get(Calendar.HOUR_OF_DAY) * 60 + now.get(Calendar.MINUTE);
-            int timetoclose = to - t;
-            return timetoclose;
-        } else {
-            return -1;
-        }
+        int today = now.get(Calendar.DAY_OF_WEEK);
+        times[0] = openTimes[today];
+        times[1] = closingTimes[today];
+        return times;
     }
 
     // Setter methods
