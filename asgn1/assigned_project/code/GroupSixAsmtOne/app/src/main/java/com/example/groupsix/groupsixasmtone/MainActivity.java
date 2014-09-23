@@ -2,6 +2,8 @@ package com.example.groupsix.groupsixasmtone;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import android.app.ListActivity;
 import android.content.Intent;
@@ -24,18 +26,22 @@ public class MainActivity extends ListActivity {
 	ArrayAdapter<String> spinnerSortingAdapter;
 	ArrayAdapter<String> spinnerFilterAdapter;
 	SimpleAdapter listViewAdapter;
+    GPS_Locator gps;
 	
-	static final ArrayList<HashMap<String,String>> list = new ArrayList<HashMap<String,String>>();
+	static final List<Map<String,String>> list = new ArrayList<Map<String,String>>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        allRestaurants = RestaurantList.getInstance();
+
+        gps = new GPS_Locator(getApplicationContext());
+
+        allRestaurants = RestaurantList.getInstance(getResources());
 
         setUpSpinners();
 //        listViewRestaurants = (ListView) findViewById(R.id.listViewRestaurants);
-        ListView listViewRestaurants = (ListView) findViewById(android.R.id.list);
+        listViewRestaurants = (ListView) findViewById(android.R.id.list);
 
         filteredRestaurants = allRestaurants.getOpen();
 
@@ -70,7 +76,6 @@ public class MainActivity extends ListActivity {
 					int position, long id) {
 				// TODO Auto-generated method stub
 				if(position == 0) {
-                    GPS_Locator gps = new GPS_Locator(getApplicationContext());
 				    filteredRestaurants.sortByDistance(gps.getLatitude(), gps.getLongitude());
 				} else {
 					filteredRestaurants.sortByTime();
@@ -81,7 +86,7 @@ public class MainActivity extends ListActivity {
 			public void onNothingSelected(AdapterView<?> parent) {
 				// TODO Auto-generated method stub
 				
-			};
+			}
 		});
 			
 		spinnerFilter = (Spinner) findViewById(R.id.spinnerFilters);
@@ -115,20 +120,20 @@ public class MainActivity extends ListActivity {
 	}
 
 	private void populateList() {
-		// TODO Auto-generated method stub
 		
-		//MAKE SURE TO CLEAR LISTVIEW BEFORE POPULATING LITVIEW
+		//MAKE SURE TO CLEAR LISTVIEW BEFORE POPULATING LISTVIEW
 		String[] subitems = {"Name", "Distance", "Hours Status", "Meal Status"};
         listViewAdapter = new SimpleAdapter(this, list, R.layout.custom_row_view,
         										  subitems, new int[] {R.id.text1,R.id.text2, R.id.text3, R.id.text4});
-		//for(Object o : restaurants) {
-        for(int i = 0; i < 7; i++) {
+		for(Restaurant r : filteredRestaurants) {
 			//populate listViewAdapter
-			HashMap<String,String> temp = new HashMap<String,String>();
-			temp.put("Distance","MONT Blanc");
-			temp.put("Hours Status", "200.00$");
-			temp.put("Meal Status", "Silver, Grey, Black");
+			Map<String,String> temp = new HashMap<String,String>();
+            temp.put("Name", r.getName());
+			temp.put("Distance", Double.toString(r.getDistanceFrom(gps.getLatitude(), gps.getLongitude())));
+			temp.put("Hours Status", r.isOpen() ? "Open" : "Closed");
+			temp.put("Meal Status", r.isMealPlan() ? "Meal Plan" : "Taste of Nashville");
 			list.add(temp);
 		}
+        this.listViewRestaurants.deferNotifyDataSetChanged();
 	}
 }
