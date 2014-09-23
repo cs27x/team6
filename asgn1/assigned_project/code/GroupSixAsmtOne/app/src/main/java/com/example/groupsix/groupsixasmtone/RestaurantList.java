@@ -18,10 +18,12 @@ public class RestaurantList extends ArrayList<Restaurant> {
 
     private final String FILENAME = "test.json";
 
+    private static RestaurantList restaurantList;
+
     /**
      * Default constructor.  Loads information from the JSON file.
      */
-    public RestaurantList() {
+    private RestaurantList() {
         this(true);
     }
 
@@ -41,8 +43,15 @@ public class RestaurantList extends ArrayList<Restaurant> {
      * Get an empty restaurant list
      * @return the empty list
      */
-    public static RestaurantList getEmptyList() {
+    private static RestaurantList getEmptyList() {
         return new RestaurantList(false);
+    }
+
+    public static RestaurantList getInstance() {
+        if (restaurantList == null) {
+            restaurantList = new RestaurantList();
+        }
+        return restaurantList;
     }
 
     /**
