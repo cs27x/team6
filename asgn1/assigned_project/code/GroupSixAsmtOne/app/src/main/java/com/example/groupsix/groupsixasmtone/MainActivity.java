@@ -66,7 +66,7 @@ public class MainActivity extends ListActivity {
 				// TODO Auto-generated method stub
 				if(position == 0) {
 				    restaurants.sortByDistance(
-                            
+
                     );
 				} else {
 					// call sorting for Time Until closed

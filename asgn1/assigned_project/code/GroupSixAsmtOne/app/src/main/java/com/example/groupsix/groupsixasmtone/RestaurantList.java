@@ -154,7 +154,7 @@ public class RestaurantList extends ArrayList<Restaurant> {
      * @param lat the source latitude
      * @param lon the source longitude
      */
-    public void sortByDistance(float lat, float lon) {
+    public void sortByDistance(double lat, double lon) {
         Collections.sort(this, new RestaurantDistanceComparator(lat, lon));
     }
 
@@ -178,18 +178,18 @@ public class RestaurantList extends ArrayList<Restaurant> {
      */
     private static class RestaurantDistanceComparator implements Comparator<Restaurant> {
 
-        private float lat;
-        private float lon;
+        private double lat;
+        private double lon;
 
-        public RestaurantDistanceComparator(float lat, float lon) {
+        public RestaurantDistanceComparator(double lat, double lon) {
             this.lat = lat;
             this.lon = lon;
         }
 
         @Override
         public int compare(Restaurant restaurant, Restaurant restaurant2) {
-            float r1 = restaurant.getDistanceFrom(lat, lon);
-            float r2 = restaurant2.getDistanceFrom(lat, lon);
+            double r1 = restaurant.getDistanceFrom(lat, lon);
+            double r2 = restaurant2.getDistanceFrom(lat, lon);
 
             if (r1 < r2) {
                 return -1;

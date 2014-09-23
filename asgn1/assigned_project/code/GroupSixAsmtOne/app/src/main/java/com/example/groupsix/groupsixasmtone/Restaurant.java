@@ -17,8 +17,8 @@ public class Restaurant implements Serializable {
     private boolean onCampus;
     private boolean mealMoney;
     private boolean delivers;
-    private float latitude;
-    private float longitude;
+    private double latitude;
+    private double longitude;
 
 
     // First element is Monday open time
@@ -77,8 +77,8 @@ public class Restaurant implements Serializable {
                       boolean onCampus,
                       boolean mealMoney,
                       boolean delivers,
-                      float latitude,
-                      float longitude,
+                      double latitude,
+                      double longitude,
                       int[] openTimes,
                       int[] closingTimes) {
         this.name = name;
@@ -184,8 +184,8 @@ public class Restaurant implements Serializable {
      * @param lon the source longitude
      * @return the distance
      */
-    public float getDistanceFrom(float lat, float lon) {
-        return (float) Math.sqrt(Math.pow(this.latitude - lat, 2) + Math.pow(this.longitude - lon, 2));
+    public double getDistanceFrom(double lat, double lon) {
+        return Math.sqrt(Math.pow(this.latitude - lat, 2) + Math.pow(this.longitude - lon, 2));
     }
 
     @Override
@@ -267,11 +267,11 @@ public class Restaurant implements Serializable {
         return foodType;
     }
 
-    public float getLongitude() {
+    public double getLongitude() {
         return longitude;
     }
 
-    public float getLatitude() {
+    public double getLatitude() {
         return latitude;
     }
 
@@ -337,11 +337,11 @@ public class Restaurant implements Serializable {
         this.delivers = delivers;
     }
 
-    public void setLatitude(float latitude) {
+    public void setLatitude(double latitude) {
         this.latitude = latitude;
     }
 
-    public void setLongitude(float longitude) {
+    public void setLongitude(double longitude) {
         this.longitude = longitude;
     }
 
