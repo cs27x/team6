@@ -23,6 +23,9 @@ public class Restaurant {
     // Last element is Monday close time
     private int[] closingTimes;
 
+    /**
+     * Default constructor
+     */
     public Restaurant() {
         this.name = "";
         this.foodType = "";
@@ -35,6 +38,10 @@ public class Restaurant {
         this.closingTimes = new int[7];
     }
 
+    /**
+     * Copy constructor
+     * @param other the other Restaurant
+     */
     public Restaurant(Restaurant other) {
         this.name = other.name;
         this.foodType = other.foodType;
@@ -47,28 +54,43 @@ public class Restaurant {
         this.closingTimes = Arrays.copyOf(other.closingTimes, other.closingTimes.length);
     }
 
-    // Constructor using JSON loaded parameters
-    public Restaurant(String Name,
-                      String TypeOfFood,
-                      Boolean OnCampus,
-                      Boolean MealMoney,
-                      Boolean Delivers,
-                      float Latitude,
-                      float Longitude,
-                      int[] Opentimes,
-                      int[] Closingtimes)
+    /**
+     * Extra constructor
+     * @param name restaurant name
+     * @param foodType type of food at restaurant
+     * @param onCampus is the food on campus?
+     * @param mealMoney do they accept meal money?
+     * @param delivers do they deliver?
+     * @param latitude latitude location
+     * @param longitude longitude location
+     * @param openTimes weekly opening times
+     * @param closingTimes weekly closing times
+     */
+    public Restaurant(String name,
+                      String foodType,
+                      boolean onCampus,
+                      boolean mealMoney,
+                      boolean delivers,
+                      float latitude,
+                      float longitude,
+                      int[] openTimes,
+                      int[] closingTimes)
     {
-        this.name = Name;
-        this.foodType = TypeOfFood;
-        this.onCampus = OnCampus;
-        this.mealMoney = MealMoney;
-        this.delivers = Delivers;
-        this.latitude = Latitude;
-        this.longitude = Longitude;
-        this.openTimes = Opentimes;
-        this.closingTimes = Closingtimes;
+        this.name = name;
+        this.foodType = foodType;
+        this.onCampus = onCampus;
+        this.mealMoney = mealMoney;
+        this.delivers = delivers;
+        this.latitude = latitude;
+        this.longitude = longitude;
+        this.openTimes = openTimes;
+        this.closingTimes = closingTimes;
     }
 
+    /**
+     * Get a calendar representing the current time
+     * @return the calendar object
+     */
     private static Calendar getCurrentCalendar() {
         Date date = new Date();
         Calendar now = GregorianCalendar.getInstance();
@@ -76,8 +98,11 @@ public class Restaurant {
         return now;
     }
 
+    /**
+     * Find out whether the restaurant is open now
+     * @return true if open, false otherwise
+     */
     public boolean isOpen() {
-        // Checks to see if restaurant is open now
         Calendar now = getCurrentCalendar();
 
         int today = now.get(Calendar.DAY_OF_WEEK);
@@ -95,8 +120,13 @@ public class Restaurant {
         }
     }
 
+    /**
+     * Find out if the restaurant is open at specified day and time
+     * @param day the day of week (Monday = 0)
+     * @param time the time in minutes after midnight
+     * @return true if open, false otherwise
+     */
     public boolean isOpen(int day, int time) {
-        // Checks to see if restaurant is open at specified day and time
 
         int openTime = openTimes[day];
         int closeTime = closingTimes[day];
@@ -118,6 +148,10 @@ public class Restaurant {
 //            return false;
     }
 
+    /**
+     * Find out how much longer the restaurant is open
+     * @return the number of minutes until close
+     */
     public int timeToClose() {
         Calendar now = getCurrentCalendar();
 
@@ -134,12 +168,18 @@ public class Restaurant {
         }
     }
 
+    /**
+     * Find out how far a location is from this restaurant
+     * @param lat the source latitude
+     * @param lon the source longitude
+     * @return the distance
+     */
     public float getDistanceFrom(float lat, float lon) {
         return 0;
     }
 
-    // Getter methods
 
+    // Getter methods
 
     public String getName() {
         return name;
@@ -171,7 +211,8 @@ public class Restaurant {
 
     /**
      * Returns an array of open and close times for today
-     * in integer format (military time)
+     * in integer format representing the number of minutes after midnight
+     * i.e. 10:00 AM = 600, 1:00 AM = 60, etc
      * @return
      */
     public int[] getTimes() {
@@ -186,6 +227,7 @@ public class Restaurant {
         return times;
     }
 
+    
     // Setter methods
 
     public void setName(String name) {

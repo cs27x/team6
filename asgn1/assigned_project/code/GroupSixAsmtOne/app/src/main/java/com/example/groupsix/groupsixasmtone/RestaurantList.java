@@ -140,7 +140,7 @@ public class RestaurantList extends ArrayList<Restaurant> {
         Collections.sort(this, new RestaurantTimeComparator(day, hours, minutes));
     }
 
-    private class RestaurantDistanceComparator implements Comparator<Restaurant> {
+    private static class RestaurantDistanceComparator implements Comparator<Restaurant> {
 
         private float lat;
         private float lon;
@@ -165,7 +165,7 @@ public class RestaurantList extends ArrayList<Restaurant> {
         }
     }
 
-    private class RestaurantTimeComparator implements Comparator<Restaurant> {
+    private static class RestaurantTimeComparator implements Comparator<Restaurant> {
 
         private int day;
         private int hours;
