@@ -1,12 +1,13 @@
-apply plugin: 'com.android.application'
+apply plugin: 'android'
+apply plugin: 'jacoco'
 
 android {
     compileSdkVersion 20
-    buildToolsVersion "20.0.0"
+    buildToolsVersion '20.0.0'
 
     defaultConfig {
-        applicationId "com.example.groupsix.groupsixasmtone"
-        minSdkVersion 8
+        // applicationId "com.example.groupsix.groupsixasmtone"
+        minSdkVersion 9
         targetSdkVersion 20
         versionCode 1
         versionName "1.0"
@@ -19,7 +20,13 @@ android {
     }
 }
 
+jacoco {
+    toolVersion = '0.7.1'
+}
+
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     compile 'com.android.support:appcompat-v7:20.0.0'
+    compile 'net.sf.flexjson:flexjson:3.2'
+    androidTestCompile 'junit:junit:4.11'
 }

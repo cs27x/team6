@@ -90,7 +90,7 @@ public class MainActivity extends ListActivity {
 			public void onItemSelected(AdapterView<?> parent, View view,
 					int position, long id) {
 				// TODO Auto-generated method stub
-				if(position == 0) {
+				if (position == 0) {
 					//call filter for open
 				} else if (position == 1) {
 					// call filter for Meal Plan
