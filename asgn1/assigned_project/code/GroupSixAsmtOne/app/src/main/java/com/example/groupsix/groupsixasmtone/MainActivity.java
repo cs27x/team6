@@ -36,10 +36,11 @@ public class MainActivity extends ListActivity {
         listViewRestaurants.setOnItemClickListener(new OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Object restaurant = restaurants.get(i);
-                Intent intent = new Intent(getBaseContext(), MyActivity.class);
+//                Object restaurant = restaurants.get(i);
+//                Intent intent = new Intent(getBaseContext(), MyActivity.class);
 //                intent.putExtra("restaurant", restaurant);
-                startActivity(intent);
+//                startActivity(intent);
+
             }
         });
         //sort restaurants here by something!

@@ -15,10 +15,10 @@ public class MyActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.restaurant_details);
-        TextView textViewDetailsName = (TextView) findViewById(R.id.textViewDetailsName);
-        Intent intent = new Intent(this, MainActivity.class);
-        restaurant = getIntent().getExtras().getSerializable("restaurant");
-        ListView listViewDetails = (ListView) findViewById(R.id.listViewDetails);
+//        TextView textViewDetailsName = (TextView) findViewById(R.id.textViewDetailsName);
+//        Intent intent = new Intent(this, MainActivity.class);
+//        restaurant = getIntent().getExtras().getSerializable("restaurant");
+//        ListView listViewDetails = (ListView) findViewById(R.id.listViewDetails);
 
         //input for loop to put in day information
     }
