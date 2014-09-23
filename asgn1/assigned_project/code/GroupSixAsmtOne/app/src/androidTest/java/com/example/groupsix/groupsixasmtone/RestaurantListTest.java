@@ -11,7 +11,7 @@ public class RestaurantListTest {
 
     @Test
     public void testLoadFromJSON() throws Exception {
-        RestaurantList rl = new RestaurantList();
+        RestaurantList rl = RestaurantList.getInstance();
         assertEquals(rl.size(), 10);
 
         for (Object r : rl) {
