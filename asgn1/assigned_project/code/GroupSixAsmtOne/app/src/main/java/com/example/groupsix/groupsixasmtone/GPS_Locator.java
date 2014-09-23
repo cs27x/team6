@@ -1,4 +1,4 @@
-package com.example.testgps_locator;
+package com.example.groupsix.groupsixasmtone;
 
 import android.app.Service;
 import android.content.Context;

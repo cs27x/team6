@@ -16,7 +16,8 @@ import android.widget.SimpleAdapter;
 import android.widget.Spinner;
 
 public class MainActivity extends ListActivity {
-	RestaurantList restaurants;
+	RestaurantList allRestaurants;
+    RestaurantList filteredRestaurants;
 	ListView listViewRestaurants;
 	Spinner spinnerSorting;
 	Spinner spinnerFilter;
@@ -30,21 +31,25 @@ public class MainActivity extends ListActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        restaurants = RestaurantList.getInstance();
+        allRestaurants = RestaurantList.getInstance();
+
         setUpSpinners();
 //        listViewRestaurants = (ListView) findViewById(R.id.listViewRestaurants);
         ListView listViewRestaurants = (ListView) findViewById(android.R.id.list);
+
+        filteredRestaurants = allRestaurants.getOpen();
+
         listViewRestaurants.setOnItemClickListener(new OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Restaurant restaurant = restaurants.get(i);
+                Restaurant restaurant = filteredRestaurants.get(i);
                 Intent intent = new Intent(getBaseContext(), MyActivity.class);
                 intent.putExtra("restaurant", restaurant);
                 startActivity(intent);
 
             }
         });
-        //sort restaurants here by something!
+
         populateList();
 
 
@@ -65,11 +70,10 @@ public class MainActivity extends ListActivity {
 					int position, long id) {
 				// TODO Auto-generated method stub
 				if(position == 0) {
-				    restaurants.sortByDistance(
-
-                    );
+                    GPS_Locator gps = new GPS_Locator(getApplicationContext());
+				    filteredRestaurants.sortByDistance(gps.getLatitude(), gps.getLongitude());
 				} else {
-					// call sorting for Time Until closed
+					filteredRestaurants.sortByTime();
 				}
 				populateList();
 			}
@@ -94,13 +98,11 @@ public class MainActivity extends ListActivity {
 					int position, long id) {
 				// TODO Auto-generated method stub
 				if (position == 0) {
-					//call filter for open
+                    filteredRestaurants = allRestaurants.getOpen();
 				} else if (position == 1) {
-					// call filter for Meal Plan
-				} else if(position == 2) {
-					// call filter for Food Type
+					filteredRestaurants = allRestaurants.getMealPlan();
 				} else {
-					// call filter for Taste of Nashville
+					filteredRestaurants = allRestaurants.getToN();
 				}
 				populateList();
 			}
