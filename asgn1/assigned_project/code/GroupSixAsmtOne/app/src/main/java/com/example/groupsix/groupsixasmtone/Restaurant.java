@@ -24,15 +24,15 @@ public class Restaurant {
     private int[] closingTimes;
 
     public Restaurant() {
-        name = "";
-        foodType = "";
-        onCampus = false;
-        mealMoney = false;
-        delivers = false;
-        latitude = 0;
-        longitude = 0;
-        openTimes = new int[7];
-        closingTimes = new int[7];
+        this.name = "";
+        this.foodType = "";
+        this.onCampus = false;
+        this.mealMoney = false;
+        this.delivers = false;
+        this.latitude = 0;
+        this.longitude = 0;
+        this.openTimes = new int[7];
+        this.closingTimes = new int[7];
     }
 
     public Restaurant(Restaurant other) {
@@ -45,6 +45,28 @@ public class Restaurant {
         this.longitude = other.longitude;
         this.openTimes = Arrays.copyOf(other.openTimes, other.openTimes.length);
         this.closingTimes = Arrays.copyOf(other.closingTimes, other.closingTimes.length);
+    }
+
+    // Constructor using JSON loaded parameters
+    public Restaurant(String Name,
+                      String TypeOfFood,
+                      Boolean OnCampus,
+                      Boolean MealMoney,
+                      Boolean Delivers,
+                      float Latitude,
+                      float Longitude,
+                      int[] Opentimes,
+                      int[] Closingtimes)
+    {
+        this.name = Name;
+        this.foodType = TypeOfFood;
+        this.onCampus = OnCampus;
+        this.mealMoney = MealMoney;
+        this.delivers = Delivers;
+        this.latitude = Latitude;
+        this.longitude = Longitude;
+        this.openTimes = Opentimes;
+        this.closingTimes = Closingtimes;
     }
 
     private static Calendar getCurrentCalendar() {
