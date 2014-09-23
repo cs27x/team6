@@ -218,7 +218,7 @@ public class Restaurant implements Serializable {
 
         JSONDeserializer<Restaurant> deserializer = new JSONDeserializer<Restaurant>();
 
-        Restaurant other = deserializer.deserialize(serialized);
+        Restaurant other = deserializer.deserialize(serialized, Restaurant.class);
 
         this.name = other.name;
         this.foodType = other.foodType;
