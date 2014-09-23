@@ -18,10 +18,17 @@ public class RestaurantList extends ArrayList<Restaurant> {
 
     private final String FILENAME = "test.json";
 
+    /**
+     * Default constructor.  Loads information from the JSON file.
+     */
     public RestaurantList() {
         this(true);
     }
 
+    /**
+     * Alternate constructor, can specify if you want data loaded
+     * @param loadData true if loading data from source
+     */
     private RestaurantList(boolean loadData) {
         super();
         if (loadData) {
@@ -82,8 +89,8 @@ public class RestaurantList extends ArrayList<Restaurant> {
     }
 
     /**
-     *
-     * @return
+     * Get all the Restaurants that accept the meal plan
+     * @return the list of Restaurants
      */
     public RestaurantList getMealPlan() {
         RestaurantList ret = getEmptyList();
@@ -98,6 +105,11 @@ public class RestaurantList extends ArrayList<Restaurant> {
         return ret;
     }
 
+    /**
+     * Get all the Restaurants that have a specific type of food
+     * @param type the type of food to match
+     * @return the list of matching Restaurants
+     */
     public RestaurantList getByFoodType(String type) {
         RestaurantList ret = getEmptyList();
 
@@ -111,6 +123,10 @@ public class RestaurantList extends ArrayList<Restaurant> {
         return ret;
     }
 
+    /**
+     * Find all the Restaurants that are on the Taste of Nashville plan
+     * @return the list of Restaurants
+     */
     public RestaurantList getToN() {
         RestaurantList ret = getEmptyList();
 
@@ -124,10 +140,18 @@ public class RestaurantList extends ArrayList<Restaurant> {
         return ret;
     }
 
+    /**
+     * Sort the current list in place by distance from a given location
+     * @param lat the source latitude
+     * @param lon the source longitude
+     */
     public void sortByDistance(float lat, float lon) {
         Collections.sort(this, new RestaurantDistanceComparator(lat, lon));
     }
 
+    /**
+     * Sort the current list in place by time until close
+     */
     public void sortByTime() {
         Date date = new Date();
         Calendar calendar = GregorianCalendar.getInstance();
@@ -140,6 +164,9 @@ public class RestaurantList extends ArrayList<Restaurant> {
         Collections.sort(this, new RestaurantTimeComparator(day, hours, minutes));
     }
 
+    /**
+     * A comparator for use in the distance sorting method
+     */
     private static class RestaurantDistanceComparator implements Comparator<Restaurant> {
 
         private float lat;
@@ -165,6 +192,9 @@ public class RestaurantList extends ArrayList<Restaurant> {
         }
     }
 
+    /**
+     * A comparator for use in the time sorting method
+     */
     private static class RestaurantTimeComparator implements Comparator<Restaurant> {
 
         private int day;

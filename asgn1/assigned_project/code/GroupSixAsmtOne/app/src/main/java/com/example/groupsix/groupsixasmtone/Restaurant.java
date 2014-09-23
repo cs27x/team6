@@ -227,7 +227,7 @@ public class Restaurant {
         return times;
     }
 
-    
+
     // Setter methods
 
     public void setName(String name) {
