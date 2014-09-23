@@ -16,7 +16,7 @@ import android.widget.SimpleAdapter;
 import android.widget.Spinner;
 
 public class MainActivity extends ListActivity {
-	ArrayList<String> restaurants;
+	RestaurantList restaurants;
 	ListView listViewRestaurants;
 	Spinner spinnerSorting;
 	Spinner spinnerFilter;
@@ -30,16 +30,17 @@ public class MainActivity extends ListActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        restaurants = RestaurantList.getInstance();
         setUpSpinners();
 //        listViewRestaurants = (ListView) findViewById(R.id.listViewRestaurants);
         ListView listViewRestaurants = (ListView) findViewById(android.R.id.list);
         listViewRestaurants.setOnItemClickListener(new OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-//                Object restaurant = restaurants.get(i);
-//                Intent intent = new Intent(getBaseContext(), MyActivity.class);
-//                intent.putExtra("restaurant", restaurant);
-//                startActivity(intent);
+                Restaurant restaurant = restaurants.get(i);
+                Intent intent = new Intent(getBaseContext(), MyActivity.class);
+                intent.putExtra("restaurant", restaurant);
+                startActivity(intent);
 
             }
         });
@@ -64,7 +65,9 @@ public class MainActivity extends ListActivity {
 					int position, long id) {
 				// TODO Auto-generated method stub
 				if(position == 0) {
-					//call sorting for Distance
+				    restaurants.sortByDistance(
+                            
+                    );
 				} else {
 					// call sorting for Time Until closed
 				}
