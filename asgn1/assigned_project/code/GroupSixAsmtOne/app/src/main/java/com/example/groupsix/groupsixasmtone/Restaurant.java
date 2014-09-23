@@ -185,7 +185,7 @@ public class Restaurant implements Serializable {
      * @return the distance
      */
     public float getDistanceFrom(float lat, float lon) {
-        return 0;
+        return (float) Math.sqrt(Math.pow(this.latitude - lat, 2) + Math.pow(this.longitude - lon, 2));
     }
 
     @Override

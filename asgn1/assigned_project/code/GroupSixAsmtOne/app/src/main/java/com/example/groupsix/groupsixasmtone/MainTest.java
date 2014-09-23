@@ -18,21 +18,8 @@ public class MainTest {
         RestaurantList rl = RestaurantList.getInstance();
 
         for (Restaurant r : rl) {
-            JSONSerializer serializer = new JSONSerializer().include("openTimes").include("closingTimes");
-
-            String serialized = serializer.serialize(r);
-
-            System.out.println(serialized);
-
-            JSONDeserializer<Restaurant> deserializer = new JSONDeserializer<Restaurant>();
-
-            Restaurant r2 = deserializer.deserialize(serialized);
-
-            System.out.println(r2);
-
+            System.out.println(r);
         }
-
-
 
     }
 }
