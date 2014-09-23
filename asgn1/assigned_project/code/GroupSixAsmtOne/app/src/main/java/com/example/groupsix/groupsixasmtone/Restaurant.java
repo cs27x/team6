@@ -1,11 +1,15 @@
 package com.example.groupsix.groupsixasmtone;
 
+import flexjson.JSONDeserializer;
+import flexjson.JSONSerializer;
+
+import java.io.*;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
-public class Restaurant {
+public class Restaurant implements Serializable {
 // Need constructor and set methods
 
     private String name;
@@ -40,6 +44,7 @@ public class Restaurant {
 
     /**
      * Copy constructor
+     *
      * @param other the other Restaurant
      */
     public Restaurant(Restaurant other) {
@@ -56,14 +61,15 @@ public class Restaurant {
 
     /**
      * Extra constructor
-     * @param name restaurant name
-     * @param foodType type of food at restaurant
-     * @param onCampus is the food on campus?
-     * @param mealMoney do they accept meal money?
-     * @param delivers do they deliver?
-     * @param latitude latitude location
-     * @param longitude longitude location
-     * @param openTimes weekly opening times
+     *
+     * @param name         restaurant name
+     * @param foodType     type of food at restaurant
+     * @param onCampus     is the food on campus?
+     * @param mealMoney    do they accept meal money?
+     * @param delivers     do they deliver?
+     * @param latitude     latitude location
+     * @param longitude    longitude location
+     * @param openTimes    weekly opening times
      * @param closingTimes weekly closing times
      */
     public Restaurant(String name,
@@ -74,8 +80,7 @@ public class Restaurant {
                       float latitude,
                       float longitude,
                       int[] openTimes,
-                      int[] closingTimes)
-    {
+                      int[] closingTimes) {
         this.name = name;
         this.foodType = foodType;
         this.onCampus = onCampus;
@@ -89,6 +94,7 @@ public class Restaurant {
 
     /**
      * Get a calendar representing the current time
+     *
      * @return the calendar object
      */
     private static Calendar getCurrentCalendar() {
@@ -100,6 +106,7 @@ public class Restaurant {
 
     /**
      * Find out whether the restaurant is open now
+     *
      * @return true if open, false otherwise
      */
     public boolean isOpen() {
@@ -122,7 +129,8 @@ public class Restaurant {
 
     /**
      * Find out if the restaurant is open at specified day and time
-     * @param day the day of week (Monday = 0)
+     *
+     * @param day  the day of week (Monday = 0)
      * @param time the time in minutes after midnight
      * @return true if open, false otherwise
      */
@@ -150,6 +158,7 @@ public class Restaurant {
 
     /**
      * Find out how much longer the restaurant is open
+     *
      * @return the number of minutes until close
      */
     public int timeToClose() {
@@ -170,12 +179,73 @@ public class Restaurant {
 
     /**
      * Find out how far a location is from this restaurant
+     *
      * @param lat the source latitude
      * @param lon the source longitude
      * @return the distance
      */
     public float getDistanceFrom(float lat, float lon) {
         return 0;
+    }
+
+    @Override
+    public String toString() {
+        return name + " / " + foodType + " / " + Arrays.toString(openTimes) + " / " + Arrays.toString(closingTimes);
+    }
+
+    /**
+     * For Serializable
+     *
+     * @param out
+     * @throws IOException
+     */
+    private void writeObject(ObjectOutputStream out) throws IOException {
+        JSONSerializer serializer = new JSONSerializer();
+
+        // Serializer.serialize returns a string, which can be serialized
+        out.writeObject(serializer.serialize(this));
+    }
+
+    /**
+     * For Serializable
+     *
+     * @param in
+     * @throws IOException
+     * @throws ClassNotFoundException
+     */
+    private void readObject(ObjectInputStream in) throws IOException, ClassNotFoundException {
+        String serialized = (String) in.readObject();
+
+        JSONDeserializer<Restaurant> deserializer = new JSONDeserializer<Restaurant>();
+
+        Restaurant other = deserializer.deserialize(serialized);
+
+        this.name = other.name;
+        this.foodType = other.foodType;
+        this.onCampus = other.onCampus;
+        this.mealMoney = other.mealMoney;
+        this.delivers = other.delivers;
+        this.latitude = other.latitude;
+        this.longitude = other.longitude;
+        this.openTimes = other.openTimes;
+        this.closingTimes = other.closingTimes;
+    }
+
+    /**
+     * For Serializable
+     *
+     * @throws ObjectStreamException
+     */
+    private void readObjectNoData() throws ObjectStreamException {
+        this.name = "";
+        this.foodType = "";
+        this.onCampus = false;
+        this.mealMoney = false;
+        this.delivers = false;
+        this.latitude = 0;
+        this.longitude = 0;
+        this.openTimes = new int[7];
+        this.closingTimes = new int[7];
     }
 
 
@@ -193,10 +263,6 @@ public class Restaurant {
         return delivers;
     }
 
-    public boolean isonCampus() {
-        return onCampus;
-    }
-
     public String getFoodType() {
         return foodType;
     }
@@ -209,10 +275,31 @@ public class Restaurant {
         return latitude;
     }
 
+    public boolean isOnCampus() {
+        return onCampus;
+    }
+
+    public boolean isMealMoney() {
+        return mealMoney;
+    }
+
+    public boolean isDelivers() {
+        return delivers;
+    }
+
+    public int[] getOpenTimes() {
+        return openTimes;
+    }
+
+    public int[] getClosingTimes() {
+        return closingTimes;
+    }
+
     /**
      * Returns an array of open and close times for today
      * in integer format representing the number of minutes after midnight
      * i.e. 10:00 AM = 600, 1:00 AM = 60, etc
+     *
      * @return
      */
     public int[] getTimes() {
@@ -228,7 +315,7 @@ public class Restaurant {
     }
 
 
-    // Setter methods
+    // Setter methods (needed for json deserialization)
 
     public void setName(String name) {
         this.name = name;

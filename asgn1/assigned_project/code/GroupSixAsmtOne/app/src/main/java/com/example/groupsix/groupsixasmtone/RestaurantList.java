@@ -140,7 +140,7 @@ public class RestaurantList extends ArrayList<Restaurant> {
         RestaurantList ret = getEmptyList();
 
         for (Restaurant r : this) {
-            if (!r.isonCampus()) {
+            if (!r.isOnCampus()) {
                 // Add a copy
                 ret.add(new Restaurant(r));
             }
