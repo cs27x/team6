@@ -104,6 +104,20 @@ public class Restaurant implements Serializable {
         return now;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (o instanceof Restaurant) {
+            Restaurant r = (Restaurant) o;
+
+            return name.equals(r.name) && foodType.equals(r.foodType)
+                    && onCampus == r.onCampus && mealMoney == r.mealMoney && delivers == r.delivers
+                    && Math.abs(latitude - r.latitude) < .01 && Math.abs(longitude - r.longitude) < .01
+                    && Arrays.equals(openTimes, r.openTimes) && Arrays.equals(closingTimes, r.closingTimes);
+        } else {
+            return false;
+        }
+    }
+
     /**
      * Find out whether the restaurant is open now
      *
