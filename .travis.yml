@@ -2,7 +2,7 @@ language: android
 android:
   components:
     - build-tools-20.0.0
-    - android-19
+    - android-20
     - extra
 
 # Emulator Management: Create, Start and Wait
@@ -11,9 +11,6 @@ android:
 #  - emulator -avd test -no-skin -no-audio -no-window &
 #  - android-wait-for-emulator
 #  - adb shell input keyevent 82 &
-
-install:
-  - true
 
 script: 
   - cd asgn1/assigned_project/code/GroupSixAsmtOne
