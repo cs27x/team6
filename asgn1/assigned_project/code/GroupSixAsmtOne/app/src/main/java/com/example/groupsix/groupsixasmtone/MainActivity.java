@@ -8,6 +8,7 @@ import java.util.Map;
 import android.app.ListActivity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -55,11 +56,6 @@ public class MainActivity extends ListActivity {
 
             }
         });
-
-        populateList();
-
-
-        setListAdapter(listViewAdapter);
     }
     
 	private void setUpSpinners() {
@@ -76,9 +72,11 @@ public class MainActivity extends ListActivity {
 					int position, long id) {
 				// TODO Auto-generated method stub
 				if(position == 0) {
+                    Log.i("filtering by distance", "now");
 				    filteredRestaurants.sortByDistance(gps.getLatitude(), gps.getLongitude());
 				} else {
-					filteredRestaurants.sortByTime();
+                    Log.i("filtering by time", "now");
+                    filteredRestaurants.sortByTime();
 				}
 				populateList();
 			}
@@ -93,7 +91,6 @@ public class MainActivity extends ListActivity {
 		spinnerFilterAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1);
 		spinnerFilterAdapter.add("Open");
 		spinnerFilterAdapter.add("Meal Plan");
-		spinnerFilterAdapter.add("Food Type");
 		spinnerFilterAdapter.add("Taste of Nashville");
 		spinnerFilter.setAdapter(spinnerFilterAdapter);
 		spinnerFilter.setOnItemSelectedListener(new OnItemSelectedListener() {
@@ -103,10 +100,14 @@ public class MainActivity extends ListActivity {
 					int position, long id) {
 				// TODO Auto-generated method stub
 				if (position == 0) {
+                    Log.i("filteredRests", "open");
                     filteredRestaurants = allRestaurants.getOpen();
+                    Log.i("the open size is", "" + filteredRestaurants.size());
 				} else if (position == 1) {
 					filteredRestaurants = allRestaurants.getMealPlan();
-				} else {
+                    Log.i("the mealplan size is", "" + filteredRestaurants.size());
+
+                } else {
 					filteredRestaurants = allRestaurants.getToN();
 				}
 				populateList();
@@ -123,6 +124,7 @@ public class MainActivity extends ListActivity {
 		
 		//MAKE SURE TO CLEAR LISTVIEW BEFORE POPULATING LISTVIEW
 		String[] subitems = {"Name", "Distance", "Hours Status", "Meal Status"};
+        list.clear();
         listViewAdapter = new SimpleAdapter(this, list, R.layout.custom_row_view,
         										  subitems, new int[] {R.id.text1,R.id.text2, R.id.text3, R.id.text4});
 		for(Restaurant r : filteredRestaurants) {
@@ -134,6 +136,7 @@ public class MainActivity extends ListActivity {
 			temp.put("Meal Status", r.isMealPlan() ? "Meal Plan" : "Taste of Nashville");
 			list.add(temp);
 		}
+        setListAdapter(listViewAdapter);
         this.listViewRestaurants.deferNotifyDataSetChanged();
 	}
 }
