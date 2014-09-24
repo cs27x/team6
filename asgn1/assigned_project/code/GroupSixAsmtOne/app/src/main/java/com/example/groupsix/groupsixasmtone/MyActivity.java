@@ -62,8 +62,13 @@ public class MyActivity extends ListActivity {
         for(int i = 0; i < 7; i++) {
             HashMap<String,String> temp = new HashMap<String,String>();
             temp.put("Day",days[i]);
-            temp.put("Time", (restaurant.getOpenTimes()[i] / 60) + ":" + (restaurant.getOpenTimes()[i] % 60) + " - " +
-                            (restaurant.getClosingTimes()[i] / 60) + ":" + (restaurant.getClosingTimes()[i] % 60));
+            String open = restaurant.getFormattedOpenTimeString(i);
+            String close = restaurant.getFormattedClosedTimeString(i);
+            if (open.equals("closed") || close.equals("closed")) {
+                temp.put("Time", "closed");
+            } else {
+                temp.put("Time", open + " - " + close);
+            }
             list.add(temp);
         }
         listViewDetails.deferNotifyDataSetChanged();

@@ -148,5 +148,35 @@
         "closingTimes": [
             1380, 1380, 1380, 1380, 1380, 1380, 1380
         ]
+    },
+    {
+        "name": "Chili's",
+        "foodType": "Mexican,American,Bar",
+        "onCampus": false,
+        "mealMoney": true,
+        "delivers": false,
+        "latitude": "0",
+        "longitude": "0",
+        "openTimes": [
+            660, 660, 660, 660, 660, 660, 660
+        ],
+        "closingTimes": [
+            1380, 1380, 1380, 1380, 1440, 1440, 1380
+        ]
+    },
+    {
+        "name": "Qdoba",
+        "foodType": "Mexican",
+        "onCampus": false,
+        "mealMoney": true,
+        "delivers": false,
+        "latitude": "0",
+        "longitude": "0",
+        "openTimes": [
+            630, 630, 630, 630, 630, 630, 630
+        ],
+        "closingTimes": [
+            1560, 1560, 1560, 1740, 1740, 1740, 1560
+        ]
     }
 ]

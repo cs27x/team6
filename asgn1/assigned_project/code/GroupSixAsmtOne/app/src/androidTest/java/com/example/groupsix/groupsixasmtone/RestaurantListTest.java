@@ -43,7 +43,7 @@ public class RestaurantListTest extends ActivityInstrumentationTestCase2<MainAct
 
     public void testJSONLoad() {
 
-        assertEquals(restaurantList.size(), 10);
+        assertEquals(restaurantList.size(), 12);
 
         for (Object o : restaurantList) {
             assertTrue(o instanceof Restaurant);

@@ -263,11 +263,13 @@ public class Restaurant implements Serializable {
         boolean am = true;
 
         // calculate the hours
-        if (hours == 0) {
+        if (hours == 0 || hours == 24) {
             ret += "12";
         } else if (hours > 12) {
-            ret += (hours - 12);
-            am = false;
+            ret += hours % 12;
+            if ((hours / 12) % 2 == 1) {
+                am = false;
+            }
         } else {
             ret += hours;
 
