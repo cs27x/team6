@@ -197,7 +197,7 @@ public class Restaurant implements Serializable {
      *
      * @param lat the source latitude
      * @param lon the source longitude
-     * @return the distance
+     * @return the distance in meters
      */
     public double getDistanceFrom(double lat, double lon) {
         Location location = new Location("");
@@ -207,7 +207,7 @@ public class Restaurant implements Serializable {
         Location other = new Location("");
         other.setLatitude(lat);
         other.setLongitude(lon);
-        
+
         return location.distanceTo(other);
     }
 
