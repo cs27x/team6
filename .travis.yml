@@ -14,4 +14,4 @@ android:
 
 script: 
   - cd asgn1/assigned_project/code/GroupSixAsmtOne
-  - ./gradlew createDebugCoverageReport
+  - ./gradlew build connectedAndroidTest
