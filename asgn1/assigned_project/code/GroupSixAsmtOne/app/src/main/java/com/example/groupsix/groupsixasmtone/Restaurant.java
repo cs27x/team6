@@ -299,6 +299,8 @@ public class Restaurant implements Serializable {
      */
     private void writeObject(ObjectOutputStream out) throws IOException {
         JSONSerializer serializer = new JSONSerializer();
+        serializer.include("openTimes");
+        serializer.include("closingTimes");
 
         // Serializer.serialize returns a string, which can be serialized
         out.writeObject(serializer.serialize(this));
