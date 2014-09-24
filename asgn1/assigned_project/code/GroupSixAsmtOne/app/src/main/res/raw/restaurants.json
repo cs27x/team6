@@ -5,8 +5,8 @@
         "onCampus": true,
         "mealMoney": true,
         "delivers": false,
-        "latitude": "0",
-        "longitude": "0",
+        "latitude": 36.1464,
+        "longitude": -86.8032,
         "openTimes": [
             420, 420, 420, 420, 420, 600, 600
         ],
@@ -20,8 +20,8 @@
         "onCampus": true,
         "mealMoney": true,
         "delivers": false,
-        "latitude": "0",
-        "longitude": "0",
+        "latitude": 36.1464,
+        "longitude": -86.8032,
         "openTimes": [
             660, 660, 660, 660, 660, -1, 990
         ],
@@ -35,8 +35,8 @@
         "onCampus": true,
         "mealMoney": true,
         "delivers": false,
-        "latitude": "0",
-        "longitude": "0",
+        "latitude": 36.1464,
+        "longitude": -86.8032,
         "openTimes": [
             660, 660, 660, 660, 660, 1020, 1020
         ],
@@ -50,8 +50,8 @@
         "onCampus": true,
         "mealMoney": true,
         "delivers": false,
-        "latitude": "0",
-        "longitude": "0",
+        "latitude": 36.1417,
+        "longitude": -86.7972,
         "openTimes": [
             420, 420, 420, 420, 420, 600, 600
         ],
@@ -65,8 +65,8 @@
         "onCampus": true,
         "mealMoney": true,
         "delivers": false,
-        "latitude": "0",
-        "longitude": "0",
+        "latitude": 36.1464,
+        "longitude": -86.8032,
         "openTimes": [
             660, 660, 660, 660, 660, -1, 660
         ],
@@ -80,8 +80,8 @@
         "onCampus": true,
         "mealMoney": true,
         "delivers": false,
-        "latitude": "0",
-        "longitude": "0",
+        "latitude": 36.1464,
+        "longitude": -86.8032,
         "openTimes": [
             420, 420, 420, 420, 420, -1, 900
         ],
@@ -95,8 +95,8 @@
         "onCampus": true,
         "mealMoney": true,
         "delivers": false,
-        "latitude": "0",
-        "longitude": "0",
+        "latitude": 36.1473,
+        "longitude": -86.8064,
         "openTimes": [
             660, 660, 660, 660, 660, -1, 840
         ],
@@ -110,8 +110,8 @@
         "onCampus": true,
         "mealMoney": true,
         "delivers": false,
-        "latitude": "0",
-        "longitude": "0",
+        "latitude": 36.1449,
+        "longitude": -86.8058,
         "openTimes": [
             660, 660, 660, 660, 660, -1, -1
         ],
@@ -125,8 +125,8 @@
         "onCampus": true,
         "mealMoney": true,
         "delivers": false,
-        "latitude": "0",
-        "longitude": "0",
+        "latitude": 36.1494,
+        "longitude": -86.8019,
         "openTimes": [
             450, 450, 450, 450, 450, -1, 1080
         ],
@@ -140,8 +140,8 @@
         "onCampus": true,
         "mealMoney": true,
         "delivers": false,
-        "latitude": "0",
-        "longitude": "0",
+        "latitude": 36.1408,
+        "longitude": -86.8062,
         "openTimes": [
             600, 600, 600, 600, 600, 600, 600
         ],
@@ -151,12 +151,12 @@
     },
     {
         "name": "Chili's",
-        "foodType": "Mexican,American,Bar",
+        "foodType": "Mexican,American,Bar & Grill",
         "onCampus": false,
         "mealMoney": true,
         "delivers": false,
-        "latitude": "0",
-        "longitude": "0",
+        "latitude": 36.1482,
+        "longitude": -86.8064,
         "openTimes": [
             660, 660, 660, 660, 660, 660, 660
         ],
@@ -170,8 +170,8 @@
         "onCampus": false,
         "mealMoney": true,
         "delivers": false,
-        "latitude": "0",
-        "longitude": "0",
+        "latitude": 36.1502,
+        "longitude": -86.8007,
         "openTimes": [
             630, 630, 630, 630, 630, 630, 630
         ],
