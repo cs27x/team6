@@ -20,13 +20,4 @@ public class MainActivityTest extends ActivityInstrumentationTestCase2<MainActiv
         mMainActivity = getActivity();
     }
 
-    public void testJSONLoad() {
-        RestaurantList rl = RestaurantList.getInstance(mMainActivity.getResources());
-
-        assertEquals(rl.size(), 10);
-
-        for (Object r : rl) {
-            assertTrue(r instanceof Restaurant);
-        }
-    }
 }
