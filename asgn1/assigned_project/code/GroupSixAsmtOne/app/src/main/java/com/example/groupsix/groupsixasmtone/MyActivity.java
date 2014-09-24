@@ -51,7 +51,7 @@ public class MyActivity extends ActionBarActivity {
 
         String[] subitems = {"Day", "Time"};
         String[] days = {"Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"};
-        listViewAdapter = new SimpleAdapter(this, list, R.layout.restaurant_details,
+        listViewAdapter = new SimpleAdapter(this, list, R.layout.custom_row_view,
                 subitems, new int[] {R.id.textDay,R.id.textTime});
 
         for(int i = 0; i < 7; i++) {
@@ -61,7 +61,6 @@ public class MyActivity extends ActionBarActivity {
             list.add(temp);
         }
 
-        ///sdf//
 
     }
 }

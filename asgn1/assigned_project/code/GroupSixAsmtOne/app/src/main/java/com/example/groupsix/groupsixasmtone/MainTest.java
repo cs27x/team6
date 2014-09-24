@@ -20,6 +20,6 @@ public class MainTest {
         for (Restaurant r : rl) {
             System.out.println(r);
         }
-
+        System.out.println("\nDone!\n");
     }
 }

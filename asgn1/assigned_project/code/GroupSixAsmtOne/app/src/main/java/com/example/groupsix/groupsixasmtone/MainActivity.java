@@ -14,6 +14,10 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.Spinner;
+import android.widget.Toast;
+
+import java.io.IOException;
+import java.io.ObjectOutputStream;
 
 public class MainActivity extends ListActivity {
 	RestaurantList allRestaurants;
@@ -42,16 +46,17 @@ public class MainActivity extends ListActivity {
         listViewRestaurants.setOnItemClickListener(new OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Restaurant restaurant = filteredRestaurants.get(i);
+                Restaurant restaurant = new Restaurant();
+                if (!filteredRestaurants.isEmpty()) {
+                    restaurant = filteredRestaurants.get(i);
+                }
                 Intent intent = new Intent(getBaseContext(), MyActivity.class);
                 intent.putExtra("restaurant", restaurant);
                 startActivity(intent);
-
             }
         });
 
         populateList();
-
 
         setListAdapter(listViewAdapter);
     }
@@ -118,16 +123,22 @@ public class MainActivity extends ListActivity {
 		// TODO Auto-generated method stub
 		
 		//MAKE SURE TO CLEAR LISTVIEW BEFORE POPULATING LITVIEW
+        list.clear();
+
 		String[] subitems = {"Name", "Distance", "Hours Status", "Meal Status"};
         listViewAdapter = new SimpleAdapter(this, list, R.layout.custom_row_view,
         										  subitems, new int[] {R.id.text1,R.id.text2, R.id.text3, R.id.text4});
-		//for(Object o : restaurants) {
+
+        String[] names = {"Adog", "Btheone", "Cdoit", "Dthecode", "Eyourmeal", "Fyourself", "Geachone"};
+        String[] distance = {"1000", "2000", "3000", "4000", "5000", "6000", "7000"};
+        String[] mealstatus = {"Red", "Orange", "Yellow", "Green", "Cyan", "Blue", "Purple"};
         for(int i = 0; i < 7; i++) {
 			//populate listViewAdapter
 			HashMap<String,String> temp = new HashMap<String,String>();
-			temp.put("Distance","MONT Blanc");
-			temp.put("Hours Status", "200.00$");
-			temp.put("Meal Status", "Silver, Grey, Black");
+            temp.put("Name", names[i]);
+			temp.put("Distance",distance[i]);
+			temp.put("Hours Status", "Open");
+			temp.put("Meal Status", mealstatus[i]);
 			list.add(temp);
 		}
 	}

@@ -6,6 +6,7 @@ import flexjson.JSONDeserializer;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.util.*;
+import android.content.Context;
 
 /**
  * Created by clarkperkins on 9/19/14.
@@ -35,6 +36,7 @@ public class RestaurantList extends ArrayList<Restaurant> {
         super();
         if (loadData) {
             // Load the data from the data source, either JSON file or server
+
             loadData();
         }
     }
@@ -53,6 +55,7 @@ public class RestaurantList extends ArrayList<Restaurant> {
         }
         return restaurantList;
     }
+
 
     /**
      * Load data from a JSON file or server (we do a local JSON file)
