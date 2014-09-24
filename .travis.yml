@@ -17,4 +17,4 @@ install:
 
 script: 
   - cd asgn1/assigned_project/code/GroupSixAsmtOne
-  - TERM=dumb ./gradlew connectedCheck --stacktrace --debug
+  - TERM=dumb ./gradlew connectedCheck
