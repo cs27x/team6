@@ -6,6 +6,7 @@ import java.util.HashMap;
 import android.app.ListActivity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -32,12 +33,13 @@ public class MainActivity extends ListActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         allRestaurants = RestaurantList.getInstance();
-
+        Log.i("SIZE all", "" + allRestaurants.size());
         setUpSpinners();
 //        listViewRestaurants = (ListView) findViewById(R.id.listViewRestaurants);
         ListView listViewRestaurants = (ListView) findViewById(android.R.id.list);
 
         filteredRestaurants = allRestaurants.getOpen();
+        Log.i("SIZE all", "" + filteredRestaurants.size());
 
         listViewRestaurants.setOnItemClickListener(new OnItemClickListener() {
             @Override
@@ -122,12 +124,22 @@ public class MainActivity extends ListActivity {
         listViewAdapter = new SimpleAdapter(this, list, R.layout.custom_row_view,
         										  subitems, new int[] {R.id.text1,R.id.text2, R.id.text3, R.id.text4});
 		//for(Object o : restaurants) {
-        for(int i = 0; i < 7; i++) {
+        GPS_Locator gps = new GPS_Locator(getApplicationContext());
+        for(int i = 0; i < filteredRestaurants.size(); i++) {
 			//populate listViewAdapter
+            Restaurant restaurant = filteredRestaurants.get(i);
 			HashMap<String,String> temp = new HashMap<String,String>();
-			temp.put("Distance","MONT Blanc");
-			temp.put("Hours Status", "200.00$");
-			temp.put("Meal Status", "Silver, Grey, Black");
+			temp.put("Distance","" + restaurant.getDistanceFrom(gps.getLatitude(), gps.getLongitude()));
+			if(restaurant.isOpen()) {
+                temp.put("Hours Status", "Open");
+            } else {
+                temp.put("Hours Status", "Closed");
+            }
+            if(restaurant.isMealMoney()) {
+                temp.put("Meal Status", "Meal Money");
+            } else {
+                temp.put("Meal Status", "Meal Plan");
+            }
 			list.add(temp);
 		}
 	}
