@@ -253,18 +253,17 @@ public class RestaurantList extends ArrayList<Restaurant> {
     private static class RestaurantTimeComparator implements Comparator<Restaurant> {
 
         private int day;
-        private int hours;
-        private int minutes;
+        private int time;
 
         public RestaurantTimeComparator(int day, int hours, int minutes) {
             this.day = day;
-            this.hours = hours;
-            this.minutes = minutes;
+            this.time = hours * 60 + minutes;
         }
 
         @Override
         public int compare(Restaurant restaurant, Restaurant restaurant2) {
-            return restaurant.timeToClose() - restaurant2.timeToClose();
+            return restaurant.timeToClose(this.day, this.time)
+                    - restaurant2.timeToClose(this.day, this.time);
         }
     }
 }

@@ -43,7 +43,7 @@ public class RestaurantListTest extends ActivityInstrumentationTestCase2<MainAct
 
     public void testJSONLoad() {
 
-        assertEquals(restaurantList.size(), 10);
+        assertEquals(restaurantList.size(), 12);
 
         for (Object o : restaurantList) {
             assertTrue(o instanceof Restaurant);
@@ -59,19 +59,29 @@ public class RestaurantListTest extends ActivityInstrumentationTestCase2<MainAct
 
             // Test to make sure everything was actually loaded
             int numZeros = 0;
+            int idx = 0;
             for (int open : r.getOpenTimes()) {
                 if (open == 0) {
                     ++numZeros;
                 }
+                if (open == 420) {
+                    assertEquals(r.getFormattedOpenTimeString(idx), "7:00 AM");
+                }
+                ++idx;
             }
 
             assertFalse(numZeros == 7);
 
             numZeros = 0;
-            for (int open : r.getClosingTimes()) {
-                if (open == 0) {
+            idx = 0;
+            for (int close : r.getClosingTimes()) {
+                if (close == 0) {
                     ++numZeros;
                 }
+                if (close == 900) {
+                    assertEquals(r.getFormattedClosedTimeString(idx), "3:00 PM");
+                }
+                ++idx;
             }
 
             assertFalse(numZeros == 7);

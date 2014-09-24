@@ -1,5 +1,6 @@
 package com.example.groupsix.groupsixasmtone;
 
+import android.app.ListActivity;
 import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
@@ -11,21 +12,24 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 
-public class MyActivity extends ActionBarActivity {
+public class MyActivity extends ListActivity {
     Restaurant restaurant;
     SimpleAdapter listViewAdapter;
 
-    static final ArrayList<HashMap<String,String>> list = new ArrayList<HashMap<String,String>>();
+    static final List<Map<String,String>> list = new ArrayList<Map<String,String>>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.restaurant_details);
-
+        list.clear();
         TextView textViewDetailsName = (TextView) findViewById(R.id.textViewDetailsName);
         restaurant = (Restaurant) getIntent().getExtras().getSerializable("restaurant");
+        textViewDetailsName.setText(restaurant.getName());
         TextView textViewFoodTypeVal = (TextView) findViewById(R.id.textViewFoodTypeVal);
         textViewFoodTypeVal.setText(restaurant.getFoodType());
         TextView textViewOnCampusVal = (TextView) findViewById(R.id.textViewOnCampusVal);
@@ -36,30 +40,38 @@ public class MyActivity extends ActionBarActivity {
         }
         TextView textViewMealMoneyVal = (TextView) findViewById(R.id.textViewMealMoneyVal);
         if(restaurant.isMealMoney()) {
-            textViewOnCampusVal.setText("Yes");
+            textViewMealMoneyVal.setText("Yes");
         } else {
-            textViewOnCampusVal.setText("No");
+            textViewMealMoneyVal.setText("No");
         }
+
         TextView textViewDeliversVal = (TextView) findViewById(R.id.textViewDeliversVal);
         if(restaurant.isDelivers()) {
-            textViewOnCampusVal.setText("Yes");
+            textViewDeliversVal.setText("Yes");
         } else {
-            textViewOnCampusVal.setText("No");
+            textViewDeliversVal.setText("No");
         }
-        ListView listViewDetails = (ListView) findViewById(R.id.listViewDetails);
+        ListView listViewDetails = (ListView) findViewById(android.R.id.list);
         //input for loop to put in day information
 
         String[] subitems = {"Day", "Time"};
         String[] days = {"Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"};
-        listViewAdapter = new SimpleAdapter(this, list, R.layout.restaurant_details,
-                subitems, new int[] {R.id.textDay,R.id.textTime});
-
+        listViewAdapter = new SimpleAdapter(this, list, R.layout.custom_row_view_two,
+                subitems, new int[] {R.id.dayDetails,R.id.subitemDetails});
+        setListAdapter(listViewAdapter);
         for(int i = 0; i < 7; i++) {
             HashMap<String,String> temp = new HashMap<String,String>();
             temp.put("Day",days[i]);
-            temp.put("Time", Integer.toString(restaurant.getOpenTimes()[i] / 60) + ":00 - " + Integer.toString(restaurant.getClosingTimes()[i] / 60) + ":00");
+            String open = restaurant.getFormattedOpenTimeString(i);
+            String close = restaurant.getFormattedClosedTimeString(i);
+            if (open.equals("closed") || close.equals("closed")) {
+                temp.put("Time", "closed");
+            } else {
+                temp.put("Time", open + " - " + close);
+            }
             list.add(temp);
         }
+        listViewDetails.deferNotifyDataSetChanged();
 
         ///sdf//
 

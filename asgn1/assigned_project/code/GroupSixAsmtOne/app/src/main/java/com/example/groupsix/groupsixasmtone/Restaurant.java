@@ -1,5 +1,6 @@
 package com.example.groupsix.groupsixasmtone;
 
+import android.location.Location;
 import flexjson.JSONDeserializer;
 import flexjson.JSONSerializer;
 
@@ -173,22 +174,31 @@ public class Restaurant implements Serializable {
     /**
      * Find out how much longer the restaurant is open
      *
+     * @param day the day of week (Monday = 0)
+     * @param time the time in minutes after midnight
      * @return the number of minutes until close
      */
-    public int timeToClose() {
-        Calendar now = getCurrentCalendar();
+    public int timeToClose(int day, int time) {
 
-        if (isOpen()) {
-            int today = now.get(Calendar.DAY_OF_WEEK);
-            int closingtime = closingTimes[today];
+        int closeTime = this.closingTimes[day];
 
-            int to = closingtime;
-            int t = now.get(Calendar.HOUR_OF_DAY) * 60 + now.get(Calendar.MINUTE);
-            int timetoclose = to - t;
-            return timetoclose;
-        } else {
+        if (closeTime == -1) {
             return -1;
+        } else {
+            return closeTime - time;
         }
+
+//        if (isOpen()) {
+//            int today = now.get(Calendar.DAY_OF_WEEK);
+//            int closingtime = closingTimes[today];
+//
+//            int to = closingtime;
+//            int t = now.get(Calendar.HOUR_OF_DAY) * 60 + now.get(Calendar.MINUTE);
+//            int timetoclose = to - t;
+//            return timetoclose;
+//        } else {
+//            return -1;
+//        }
     }
 
     /**
@@ -196,10 +206,95 @@ public class Restaurant implements Serializable {
      *
      * @param lat the source latitude
      * @param lon the source longitude
-     * @return the distance
+     * @return the distance in meters
      */
     public double getDistanceFrom(double lat, double lon) {
-        return Math.sqrt(Math.pow(this.latitude - lat, 2) + Math.pow(this.longitude - lon, 2));
+        Location location = new Location("");
+        location.setLatitude(this.latitude);
+        location.setLongitude(this.longitude);
+
+        Location other = new Location("");
+        other.setLatitude(lat);
+        other.setLongitude(lon);
+
+        return location.distanceTo(other);
+    }
+
+    /**
+     * Returns a pretty string for the opening time
+     *
+     * @param day the day of week (Monday = 0)
+     * @return the pretty string
+     */
+    public String getFormattedOpenTimeString(int day) {
+        int time = this.openTimes[day];
+
+        return getFormattedStringForTime(time);
+    }
+
+    /**
+     * Returns a pretty string for the closing time
+     *
+     * @param day the day of week (Monday = 0)
+     * @return the pretty string
+     */
+    public String getFormattedClosedTimeString(int day) {
+        int time = this.closingTimes[day];
+
+        return getFormattedStringForTime(time);
+    }
+
+    /**
+     * Does the bulk of the work for pretty printing.
+     *
+     * @param time the time in minutes after midnight
+     * @return the pretty string
+     */
+    private String getFormattedStringForTime(int time) {
+        if (time == -1) {
+            return "closed";
+        }
+
+        int hours = time / 60;
+        int minutes = time % 60;
+
+        String ret = "";
+
+        boolean am = true;
+
+        // calculate the hours
+        if (hours == 0 || hours == 24) {
+            ret += "12";
+        } else if (hours > 12) {
+            ret += hours % 12;
+            if ((hours / 12) % 2 == 1) {
+                am = false;
+            }
+        } else {
+            ret += hours;
+
+            if (hours == 12) {
+                am = false;
+            }
+        }
+
+        ret += ":";
+
+        // Calculate the minutes
+        if (minutes < 10) {
+            ret += "0";
+        }
+
+        ret += minutes + " ";
+
+        // Add the AM / PM
+        if (am) {
+            ret += "AM";
+        } else {
+            ret += "PM";
+        }
+
+        return ret;
     }
 
     @Override
@@ -215,6 +310,8 @@ public class Restaurant implements Serializable {
      */
     private void writeObject(ObjectOutputStream out) throws IOException {
         JSONSerializer serializer = new JSONSerializer();
+        serializer.include("openTimes");
+        serializer.include("closingTimes");
 
         // Serializer.serialize returns a string, which can be serialized
         out.writeObject(serializer.serialize(this));
