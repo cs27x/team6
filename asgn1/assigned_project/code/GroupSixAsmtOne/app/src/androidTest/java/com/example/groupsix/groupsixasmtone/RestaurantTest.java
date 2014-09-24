@@ -1,18 +1,19 @@
 package com.example.groupsix.groupsixasmtone;
 
-import org.junit.After;
-import org.junit.Before;
 
-public class RestaurantTest
-{
-    @Before
+import junit.framework.TestCase;
+
+public class RestaurantTest extends TestCase {
     public void setUp() throws Exception {
 
     }
 
-    @After
     public void tearDown() throws Exception {
 
+
+    }
+
+    public void testasfasf() {
 
     }
 }

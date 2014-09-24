@@ -1,38 +1,40 @@
 package com.example.groupsix.groupsixasmtone;
 
 
+import android.content.res.Resources;
 import flexjson.JSONDeserializer;
 
-import java.io.FileNotFoundException;
-import java.io.FileReader;
+import java.io.*;
 import java.util.*;
 
 /**
  * Created by clarkperkins on 9/19/14.
- *
  */
-
 
 
 public class RestaurantList extends ArrayList<Restaurant> {
 
-    private final String FILENAME = "test.json";
+    private static final String FILENAME = "restaurants";
 
     private static RestaurantList restaurantList;
+
+    private Resources resources;
 
     /**
      * Default constructor.  Loads information from the JSON file.
      */
-    private RestaurantList() {
-        this(true);
+    private RestaurantList(Resources res) {
+        this(true, res);
     }
 
     /**
      * Alternate constructor, can specify if you want data loaded
+     *
      * @param loadData true if loading data from source
      */
-    private RestaurantList(boolean loadData) {
+    private RestaurantList(boolean loadData, Resources res) {
         super();
+        this.resources = res;
         if (loadData) {
             // Load the data from the data source, either JSON file or server
             loadData();
@@ -41,15 +43,34 @@ public class RestaurantList extends ArrayList<Restaurant> {
 
     /**
      * Get an empty restaurant list
+     *
      * @return the empty list
      */
     private static RestaurantList getEmptyList() {
-        return new RestaurantList(false);
+        return new RestaurantList(false, null);
     }
 
-    public static RestaurantList getInstance() {
+    /**
+     * For singleton class - get the one and only instance
+     *
+     * @param res Resources object
+     * @return the single RestaurantList
+     */
+    public static RestaurantList getInstance(Resources res) {
         if (restaurantList == null) {
-            restaurantList = new RestaurantList();
+            restaurantList = new RestaurantList(res);
+        }
+        return restaurantList;
+    }
+
+    /**
+     * For testing
+     *
+     * @return the single RestaurantList
+     */
+    public static RestaurantList getInstance() throws InstantiationError {
+        if (restaurantList == null) {
+            throw new InstantiationError("You must call getInstance(Resources res) at least once before now");
         }
         return restaurantList;
     }
@@ -60,13 +81,25 @@ public class RestaurantList extends ArrayList<Restaurant> {
     private void loadData() {
 
         try {
-            Scanner in = new Scanner(new FileReader(FILENAME));
+            //get the resource id from the file name
+            int rID = resources.getIdentifier("com.example.groupsix.groupsixasmtone:raw/" + FILENAME, null, null);
+            //get the file as a stream
+            InputStream iS = resources.openRawResource(rID);
 
-            String jsonText = "";
+            //create a buffer that has the same size as the InputStream
+            byte[] buffer = new byte[iS.available()];
+            //read the text file as a stream, into the buffer
+            iS.read(buffer);
+            //create a output stream to write the buffer into
+            ByteArrayOutputStream oS = new ByteArrayOutputStream();
+            //write this buffer to the output stream
+            oS.write(buffer);
+            //Close the Input and Output streams
+            oS.close();
+            iS.close();
 
-            while (in.hasNextLine()) {
-                jsonText += in.nextLine();
-            }
+            // Convert to string
+            String jsonText = oS.toString();
 
             List<Restaurant> restaurants = new JSONDeserializer<List<Restaurant>>().use("values", Restaurant.class).deserialize(jsonText);
 
@@ -74,7 +107,7 @@ public class RestaurantList extends ArrayList<Restaurant> {
                 add(restaurant);
             }
 
-        } catch (FileNotFoundException e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
 
@@ -82,6 +115,7 @@ public class RestaurantList extends ArrayList<Restaurant> {
 
     /**
      * Get a List of Restaurant objects that are currently open
+     *
      * @return the list of Restaurant objects
      */
     public RestaurantList getOpen() {
@@ -99,6 +133,7 @@ public class RestaurantList extends ArrayList<Restaurant> {
 
     /**
      * Get all the Restaurants that accept the meal plan
+     *
      * @return the list of Restaurants
      */
     public RestaurantList getMealPlan() {
@@ -116,6 +151,7 @@ public class RestaurantList extends ArrayList<Restaurant> {
 
     /**
      * Get all the Restaurants that have a specific type of food
+     *
      * @param type the type of food to match
      * @return the list of matching Restaurants
      */
@@ -134,6 +170,7 @@ public class RestaurantList extends ArrayList<Restaurant> {
 
     /**
      * Find all the Restaurants that are on the Taste of Nashville plan
+     *
      * @return the list of Restaurants
      */
     public RestaurantList getToN() {
@@ -151,6 +188,7 @@ public class RestaurantList extends ArrayList<Restaurant> {
 
     /**
      * Sort the current list in place by distance from a given location
+     *
      * @param lat the source latitude
      * @param lon the source longitude
      */
@@ -159,7 +197,7 @@ public class RestaurantList extends ArrayList<Restaurant> {
     }
 
     /**
-     * Sort the current list in place by time until close
+     * Use current time to sort list
      */
     public void sortByTime() {
         Date date = new Date();
@@ -170,6 +208,14 @@ public class RestaurantList extends ArrayList<Restaurant> {
         int minutes = calendar.get(Calendar.MINUTE);
         int day = calendar.get(Calendar.DAY_OF_WEEK);
 
+        sortByTime(day, hours, minutes);
+    }
+
+
+    /**
+     * Sort the current list in place by time until close
+     */
+    public void sortByTime(int day, int hours, int minutes) {
         Collections.sort(this, new RestaurantTimeComparator(day, hours, minutes));
     }
 
