@@ -79,7 +79,7 @@ public class RestaurantTest extends TestCase {
         int t = now.get(Calendar.HOUR_OF_DAY) * 60 + now.get(Calendar.MINUTE);
         int timetoclose = closingtime - t;
 
-        assertTrue(r.timeToClose() == timetoclose);
+        assertTrue(r.timeToClose(today, t) == timetoclose);
     }
 
     /**
