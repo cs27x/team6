@@ -56,7 +56,8 @@ public class RestaurantTest extends TestCase {
         Restaurant r = new Restaurant("", "", false, false, false,
                 0, 0, opentimes, closetimes);
 
-        assertTrue(r.isOpen(1, 600));
+        // 0 is the first element in the array which corresponds to Monday's open time
+        assertTrue(r.isOpen(0, 600));
     }
 
     /**
@@ -82,7 +83,7 @@ public class RestaurantTest extends TestCase {
     }
 
     /**
-     * Restaurant should assert true for meal plan
+     * Restaurant should assert true for on campus
      */
     public void testisOnCampus() {
         int[] opentimes = {0, 0, 0, 0, 0, 0, 0};
@@ -107,5 +108,16 @@ public class RestaurantTest extends TestCase {
         assertTrue(r.isMealPlan());
     }
 
+    /**
+     * Restaurant should assert true for delivery
+     */
+    public void testisDelivers() {
+        int[] opentimes = {0, 0, 0, 0, 0, 0, 0};
+        int[] closetimes =  {1440, 1440, 1440, 1440, 1440, 1440, 1440};
 
+        Restaurant r = new Restaurant("", "", false, false, true,
+                0, 0, opentimes, closetimes);
+
+        assertTrue(r.isDelivers());
+    }
 }
