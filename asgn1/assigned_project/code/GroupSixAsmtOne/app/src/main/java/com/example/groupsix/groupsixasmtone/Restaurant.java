@@ -1,5 +1,6 @@
 package com.example.groupsix.groupsixasmtone;
 
+import android.location.Location;
 import flexjson.JSONDeserializer;
 import flexjson.JSONSerializer;
 
@@ -199,7 +200,15 @@ public class Restaurant implements Serializable {
      * @return the distance
      */
     public double getDistanceFrom(double lat, double lon) {
-        return Math.sqrt(Math.pow(this.latitude - lat, 2) + Math.pow(this.longitude - lon, 2));
+        Location location = new Location("");
+        location.setLatitude(this.latitude);
+        location.setLongitude(this.longitude);
+
+        Location other = new Location("");
+        other.setLatitude(lat);
+        other.setLongitude(lon);
+        
+        return location.distanceTo(other);
     }
 
     @Override
