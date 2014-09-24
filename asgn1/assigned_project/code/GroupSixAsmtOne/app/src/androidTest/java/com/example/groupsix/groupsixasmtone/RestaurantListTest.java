@@ -151,14 +151,11 @@ public class RestaurantListTest extends ActivityInstrumentationTestCase2<MainAct
         double lon = 35.12441;
         restaurantList.sortByDistance(lat, lon);
 
-        double prev = 1001;
+        double prev = restaurantList.get(0).getDistanceFrom(lat, lon);
 
-        for (Restaurant r : restaurantList) {
-            if (prev > 1000) {
-                prev = r.getDistanceFrom(lat, lon);
-            } else {
-                assertTrue(prev <= r.getDistanceFrom(lat, lon));
-            }
+        for (int i = 1; i < restaurantList.size(); ++i) {
+            assertTrue(prev <= restaurantList.get(i).getDistanceFrom(lat, lon));
+            prev = restaurantList.get(i).getDistanceFrom(lat, lon);
         }
     }
 
@@ -175,14 +172,11 @@ public class RestaurantListTest extends ActivityInstrumentationTestCase2<MainAct
 
         restaurantList.sortByTime(day, hours, minutes);
 
-        int prev = 10000;
+        int prev = restaurantList.get(0).getClosingTimes()[day] - totalMinutes;
 
-        for (Restaurant r : restaurantList) {
-            if (prev == 10000) {
-                prev = r.getClosingTimes()[day] - totalMinutes;
-            } else {
-                assertTrue(prev <= (r.getClosingTimes()[day] - totalMinutes));
-            }
+        for (int i = 1; i < restaurantList.size(); ++i) {
+            assertTrue(prev <= (restaurantList.get(i).getClosingTimes()[day] - totalMinutes));
+            prev = restaurantList.get(i).getClosingTimes()[day] - totalMinutes;
         }
     }
 }

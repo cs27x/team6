@@ -11,11 +11,13 @@ public class MainTest {
 
     public static void main(String[] args) throws IOException {
 
-//        RestaurantList rl = RestaurantList.getInstance();
-//
-//        for (Restaurant r : rl) {
-//            System.out.println(r);
-//        }
+        RestaurantList rl = RestaurantList.getInstance();
+
+        rl.sortByTime();
+
+        for (Restaurant r : rl) {
+            System.out.println(r);
+        }
 
     }
 }

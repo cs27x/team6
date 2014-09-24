@@ -70,7 +70,8 @@ public class RestaurantList extends ArrayList<Restaurant> {
      */
     public static RestaurantList getInstance() throws InstantiationError {
         if (restaurantList == null) {
-            throw new InstantiationError("You must call getInstance(Resources res) at least once before now");
+//            throw new InstantiationError("You must call getInstance(Resources res) at least once before now");
+            restaurantList = new RestaurantList(null);
         }
         return restaurantList;
     }
@@ -81,10 +82,15 @@ public class RestaurantList extends ArrayList<Restaurant> {
     private void loadData() {
 
         try {
-            //get the resource id from the file name
-            int rID = resources.getIdentifier("com.example.groupsix.groupsixasmtone:raw/" + FILENAME, null, null);
-            //get the file as a stream
-            InputStream iS = resources.openRawResource(rID);
+            InputStream iS;
+            if (resources != null) {
+                //get the resource id from the file name
+                int rID = resources.getIdentifier("com.example.groupsix.groupsixasmtone:raw/" + FILENAME, null, null);
+                //get the file as a stream
+                iS = resources.openRawResource(rID);
+            } else {
+                iS = new FileInputStream("restaurants.java");
+            }
 
             //create a buffer that has the same size as the InputStream
             byte[] buffer = new byte[iS.available()];
@@ -237,13 +243,15 @@ public class RestaurantList extends ArrayList<Restaurant> {
             double r1 = restaurant.getDistanceFrom(lat, lon);
             double r2 = restaurant2.getDistanceFrom(lat, lon);
 
-            if (r1 < r2) {
-                return -1;
-            } else if (r1 > r2) {
-                return 1;
-            } else {
-                return 0;
-            }
+            return Double.compare(r1, r2);
+
+//            if (r1 < r2) {
+//                return -1;
+//            } else if (r1 > r2) {
+//                return 1;
+//            } else {
+//                return 0;
+//            }
         }
     }
 
@@ -262,8 +270,16 @@ public class RestaurantList extends ArrayList<Restaurant> {
 
         @Override
         public int compare(Restaurant restaurant, Restaurant restaurant2) {
-            return restaurant.timeToClose(this.day, this.time)
-                    - restaurant2.timeToClose(this.day, this.time);
+            int t1 = restaurant.timeToClose(this.day, this.time);
+            int t2 = restaurant2.timeToClose(this.day, this.time);
+
+            if (t1 < t2) {
+                return -1;
+            } else if (t2 > t1) {
+                return 1;
+            } else {
+                return 0;
+            }
         }
     }
 }
