@@ -12,6 +12,9 @@ android:
 #  - android-wait-for-emulator
 #  - adb shell input keyevent 82 &
 
+install:
+  - true
+
 script: 
   - cd asgn1/assigned_project/code/GroupSixAsmtOne
-  - ./gradlew connectedCheck --stacktrace --debug
+  - TERM=dumb ./gradlew connectedCheck --stacktrace --debug
