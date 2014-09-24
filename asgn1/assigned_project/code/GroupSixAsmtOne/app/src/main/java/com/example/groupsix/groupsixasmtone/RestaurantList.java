@@ -68,7 +68,7 @@ public class RestaurantList extends ArrayList<Restaurant> {
      *
      * @return the single RestaurantList
      */
-    public static RestaurantList getInstance() {
+    public static RestaurantList getInstance() throws InstantiationError {
         if (restaurantList == null) {
             throw new InstantiationError("You must call getInstance(Resources res) at least once before now");
         }
