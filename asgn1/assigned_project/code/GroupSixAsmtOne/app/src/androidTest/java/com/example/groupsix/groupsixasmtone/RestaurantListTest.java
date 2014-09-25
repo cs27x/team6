@@ -172,11 +172,11 @@ public class RestaurantListTest extends ActivityInstrumentationTestCase2<MainAct
 
         restaurantList.sortByTime(day, hours, minutes);
 
-        int prev = restaurantList.get(0).getClosingTimes()[day] - totalMinutes;
+        int prev = restaurantList.get(0).getClosingTime(day) - totalMinutes;
 
         for (int i = 1; i < restaurantList.size(); ++i) {
-            assertTrue(prev <= (restaurantList.get(i).getClosingTimes()[day] - totalMinutes));
-            prev = restaurantList.get(i).getClosingTimes()[day] - totalMinutes;
+            assertTrue(prev <= (restaurantList.get(i).getClosingTime(day) - totalMinutes));
+            prev = restaurantList.get(i).getClosingTime(day) - totalMinutes;
         }
     }
 }

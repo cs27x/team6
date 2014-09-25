@@ -89,7 +89,7 @@ public class RestaurantList extends ArrayList<Restaurant> {
                 //get the file as a stream
                 iS = resources.openRawResource(rID);
             } else {
-                iS = new FileInputStream("restaurants.java");
+                iS = new FileInputStream("restaurants.json");
             }
 
             //create a buffer that has the same size as the InputStream
@@ -264,6 +264,7 @@ public class RestaurantList extends ArrayList<Restaurant> {
         private int time;
 
         public RestaurantTimeComparator(int day, int hours, int minutes) {
+            System.out.println("DAY: " + day);
             this.day = day;
             this.time = hours * 60 + minutes;
         }
@@ -274,10 +275,19 @@ public class RestaurantList extends ArrayList<Restaurant> {
             int t2 = restaurant2.timeToClose(this.day, this.time);
 
             if (t1 < t2) {
+                System.out.println(restaurant + " < " + restaurant2);
+                System.out.println("" + t1 + " < " + t2);
+                System.out.println();
                 return -1;
-            } else if (t2 > t1) {
+            } else if (t1 > t2) {
+                System.out.println(restaurant + " > " + restaurant2);
+                System.out.println("" + t1 + " > " + t2);
+                System.out.println();
                 return 1;
             } else {
+                System.out.println(restaurant + " == " + restaurant2);
+                System.out.println("" + t1 + " == " + t2);
+                System.out.println();
                 return 0;
             }
         }

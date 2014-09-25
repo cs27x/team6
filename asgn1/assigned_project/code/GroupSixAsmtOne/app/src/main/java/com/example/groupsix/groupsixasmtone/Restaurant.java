@@ -180,7 +180,7 @@ public class Restaurant implements Serializable {
      */
     public int timeToClose(int day, int time) {
 
-        int closeTime = this.closingTimes[day];
+        int closeTime = this.getClosingTime(day);
 
         if (closeTime == -1) {
             return -1;
@@ -227,7 +227,7 @@ public class Restaurant implements Serializable {
      * @return the pretty string
      */
     public String getFormattedOpenTimeString(int day) {
-        int time = this.openTimes[day];
+        int time = this.getOpenTime(day);
 
         return getFormattedStringForTime(time);
     }
@@ -239,7 +239,7 @@ public class Restaurant implements Serializable {
      * @return the pretty string
      */
     public String getFormattedClosedTimeString(int day) {
-        int time = this.closingTimes[day];
+        int time = this.getClosingTime(day);
 
         return getFormattedStringForTime(time);
     }
@@ -404,6 +404,14 @@ public class Restaurant implements Serializable {
 
     public int[] getClosingTimes() {
         return closingTimes;
+    }
+
+    public int getOpenTime(int day) {
+        return this.openTimes[(day - 2) % 7];
+    }
+
+    public int getClosingTime(int day) {
+        return this.closingTimes[(day - 2) % 7];
     }
 
     /**
