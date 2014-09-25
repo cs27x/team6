@@ -1,6 +1,8 @@
 package com.example.groupsix.groupsixasmtone;
 
 import android.location.Location;
+import android.util.Log;
+
 import flexjson.JSONDeserializer;
 import flexjson.JSONSerializer;
 
@@ -407,11 +409,19 @@ public class Restaurant implements Serializable {
     }
 
     public int getOpenTime(int day) {
-        return this.openTimes[(day - 2) % 7];
+        day = (day - 2) % 7;
+        if(day < 0) {
+            day += 7;
+        }
+        return this.openTimes[day];
     }
 
     public int getClosingTime(int day) {
-        return this.closingTimes[(day - 2) % 7];
+        day = (day - 2) % 7;
+        if(day < 0) {
+            day += 7;
+        }
+        return this.closingTimes[day];
     }
 
     /**

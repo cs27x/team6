@@ -28,7 +28,7 @@ public class MainActivity extends ListActivity {
 	ArrayAdapter<String> spinnerFilterAdapter;
 	SimpleAdapter listViewAdapter;
     GPS_Locator gps;
-	
+	int curPositionSorting;
 	static final List<Map<String,String>> list = new ArrayList<Map<String,String>>();
 
     @Override
@@ -43,9 +43,9 @@ public class MainActivity extends ListActivity {
         setUpSpinners();
 //        listViewRestaurants = (ListView) findViewById(R.id.listViewRestaurants);
         listViewRestaurants = (ListView) findViewById(android.R.id.list);
-
-        filteredRestaurants = allRestaurants.getOpen();
-
+        filteredRestaurants = allRestaurants;
+//        filteredRestaurants = allRestaurants.getOpen();
+//        filteredRestaurants.sortByDistance(gps.getLatitude(), gps.getLongitude());
         listViewRestaurants.setOnItemClickListener(new OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
@@ -56,6 +56,7 @@ public class MainActivity extends ListActivity {
 
             }
         });
+
     }
     
 	private void setUpSpinners() {
@@ -71,14 +72,7 @@ public class MainActivity extends ListActivity {
 			public void onItemSelected(AdapterView<?> parent, View view,
 					int position, long id) {
 				// TODO Auto-generated method stub
-				if(position == 0) {
-                    Log.i("filtering by distance", "now");
-				    filteredRestaurants.sortByDistance(gps.getLatitude(), gps.getLongitude());
-				} else {
-                    Log.i("filtering by time", "now");
-                    filteredRestaurants.sortByTime();
-				}
-				populateList();
+				performSort(position);
 			}
 			@Override
 			public void onNothingSelected(AdapterView<?> parent) {
@@ -103,9 +97,11 @@ public class MainActivity extends ListActivity {
                     Log.i("filteredRests", "open");
                     filteredRestaurants = allRestaurants.getOpen();
                     Log.i("the open size is", "" + filteredRestaurants.size());
-				} else if (position == 1) {
+                    performSort(curPositionSorting);
+                } else if (position == 1) {
 					filteredRestaurants = allRestaurants.getMealPlan();
                     Log.i("the mealplan size is", "" + filteredRestaurants.size());
+                    performSort(curPositionSorting);
 
                 } else {
 					filteredRestaurants = allRestaurants.getToN();
@@ -120,6 +116,18 @@ public class MainActivity extends ListActivity {
 		});
 	}
 
+    private void performSort(int position) {
+        if(position == 1) {
+            Log.i("filtering by time", "now");
+            filteredRestaurants.sortByTime();
+        } else {
+            Log.i("filtering by distance", "now");
+            filteredRestaurants.sortByDistance(gps.getLatitude(), gps.getLongitude());
+        }
+        curPositionSorting = position;
+        populateList();
+    }
+
 	private void populateList() {
 		
 		//MAKE SURE TO CLEAR LISTVIEW BEFORE POPULATING LISTVIEW
@@ -131,7 +139,7 @@ public class MainActivity extends ListActivity {
 			//populate listViewAdapter
 			Map<String,String> temp = new HashMap<String,String>();
             temp.put("Name", r.getName());
-			temp.put("Distance", Double.toString(r.getDistanceFrom(gps.getLatitude(), gps.getLongitude())));
+			temp.put("Distance", Double.toString(r.getDistanceFrom(gps.getLatitude(), gps.getLongitude())) + " m");
 			temp.put("Hours Status", r.isOpen() ? "Open" : "Closed");
 			temp.put("Meal Status", r.isMealPlan() ? "Meal Plan" : "Taste of Nashville");
 			list.add(temp);
