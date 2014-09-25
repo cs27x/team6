@@ -1,5 +1,5 @@
 apply plugin: 'android'
-apply plugin: 'jacoco'
+//apply plugin: 'jacoco'
 
 android {
     compileSdkVersion 20
@@ -17,9 +17,9 @@ android {
             runProguard false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
-        debug {
-            testCoverageEnabled true
-        }
+//        debug {
+//            testCoverageEnabled true
+//        }
     }
 }
 

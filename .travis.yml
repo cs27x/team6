@@ -15,4 +15,4 @@ before_script:
 
 script: 
   - cd asgn1/assigned_project/code/GroupSixAsmtOne
-  - TERM=dumb ./gradlew createDebugCoverageReport
+  - TERM=dumb ./gradlew connectedCheck
