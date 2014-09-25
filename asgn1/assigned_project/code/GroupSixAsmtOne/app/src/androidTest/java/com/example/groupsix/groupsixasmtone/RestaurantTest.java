@@ -57,7 +57,7 @@ public class RestaurantTest extends TestCase {
                 0, 0, opentimes, closetimes);
 
         // 0 is the first element in the array which corresponds to Monday's open time
-        assertTrue(r.isOpen(0, 600));
+        assertTrue(r.isOpen(2, 600));
     }
 
     /**
