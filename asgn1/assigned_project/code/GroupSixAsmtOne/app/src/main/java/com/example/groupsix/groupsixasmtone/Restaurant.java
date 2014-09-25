@@ -136,9 +136,6 @@ public class Restaurant implements Serializable {
         if (openTime >= 0 && closeTime >= 0) {
             int currentTime = now.get(Calendar.HOUR_OF_DAY) * 60 + now.get(Calendar.MINUTE);
             return openTime <= currentTime && currentTime <= closeTime;
-//            boolean isBetween = to > from && t >= from && t <= to || to < from && (t >= from || t <= to);
-//
-//            return isBetween;
         } else {
             return false;
         }
@@ -158,19 +155,6 @@ public class Restaurant implements Serializable {
 
         // Check for 0 in array
         return openTime >= 0 && closeTime >= 0 && openTime <= time && time <= closeTime;
-
-//        if (openTime >= 0) {
-//            int from = openTime;
-//            int to = closeTime;
-//            Date date = new Date();
-//            Calendar c = Calendar.getInstance();
-//            c.setTime(date);
-//            int t = c.get(Calendar.HOUR_OF_DAY) * 100 + c.get(Calendar.MINUTE);
-//            boolean isBetween = to > from && t >= from && t <= to || to < from && (t >= from || t <= to);
-//
-//            return isBetween;
-//        } else
-//            return false;
     }
 
     /**
@@ -189,18 +173,6 @@ public class Restaurant implements Serializable {
         } else {
             return closeTime - time;
         }
-
-//        if (isOpen()) {
-//            int today = now.get(Calendar.DAY_OF_WEEK);
-//            int closingtime = closingTimes[today];
-//
-//            int to = closingtime;
-//            int t = now.get(Calendar.HOUR_OF_DAY) * 60 + now.get(Calendar.MINUTE);
-//            int timetoclose = to - t;
-//            return timetoclose;
-//        } else {
-//            return -1;
-//        }
     }
 
     /**

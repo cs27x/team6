@@ -59,7 +59,7 @@ public class RestaurantListTest extends ActivityInstrumentationTestCase2<MainAct
 
             // Test to make sure everything was actually loaded
             int numZeros = 0;
-            int idx = 0;
+            int idx = 2;
             for (int open : r.getOpenTimes()) {
                 if (open == 0) {
                     ++numZeros;
@@ -68,12 +68,13 @@ public class RestaurantListTest extends ActivityInstrumentationTestCase2<MainAct
                     assertEquals(r.getFormattedOpenTimeString(idx), "7:00 AM");
                 }
                 ++idx;
+                idx %= 7;
             }
 
             assertFalse(numZeros == 7);
 
             numZeros = 0;
-            idx = 0;
+            idx = 2;
             for (int close : r.getClosingTimes()) {
                 if (close == 0) {
                     ++numZeros;
@@ -82,6 +83,7 @@ public class RestaurantListTest extends ActivityInstrumentationTestCase2<MainAct
                     assertEquals(r.getFormattedClosedTimeString(idx), "3:00 PM");
                 }
                 ++idx;
+                idx %= 7;
             }
 
             assertFalse(numZeros == 7);
