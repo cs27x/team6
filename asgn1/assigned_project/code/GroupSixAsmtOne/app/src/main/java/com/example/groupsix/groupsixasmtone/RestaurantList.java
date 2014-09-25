@@ -275,19 +275,10 @@ public class RestaurantList extends ArrayList<Restaurant> {
             int t2 = restaurant2.timeToClose(this.day, this.time);
 
             if (t1 < t2) {
-                System.out.println(restaurant + " < " + restaurant2);
-                System.out.println("" + t1 + " < " + t2);
-                System.out.println();
                 return -1;
             } else if (t1 > t2) {
-                System.out.println(restaurant + " > " + restaurant2);
-                System.out.println("" + t1 + " > " + t2);
-                System.out.println();
                 return 1;
             } else {
-                System.out.println(restaurant + " == " + restaurant2);
-                System.out.println("" + t1 + " == " + t2);
-                System.out.println();
                 return 0;
             }
         }
