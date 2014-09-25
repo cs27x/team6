@@ -55,7 +55,7 @@ public class MyActivity extends ListActivity {
         //input for loop to put in day information
 
         String[] subitems = {"Day", "Time"};
-        String[] days = {"Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"};
+        String[] days = {"Saturday", "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday"};
         listViewAdapter = new SimpleAdapter(this, list, R.layout.custom_row_view_two,
                 subitems, new int[] {R.id.dayDetails,R.id.subitemDetails});
         setListAdapter(listViewAdapter);
