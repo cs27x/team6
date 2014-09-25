@@ -70,8 +70,7 @@ public class RestaurantList extends ArrayList<Restaurant> {
      */
     public static RestaurantList getInstance() throws InstantiationError {
         if (restaurantList == null) {
-//            throw new InstantiationError("You must call getInstance(Resources res) at least once before now");
-            restaurantList = new RestaurantList(null);
+            throw new InstantiationError("You must call getInstance(Resources res) at least once before now");
         }
         return restaurantList;
     }
@@ -82,15 +81,10 @@ public class RestaurantList extends ArrayList<Restaurant> {
     private void loadData() {
 
         try {
-            InputStream iS;
-            if (resources != null) {
-                //get the resource id from the file name
-                int rID = resources.getIdentifier("com.example.groupsix.groupsixasmtone:raw/" + FILENAME, null, null);
-                //get the file as a stream
-                iS = resources.openRawResource(rID);
-            } else {
-                iS = new FileInputStream("restaurants.json");
-            }
+            //get the resource id from the file name
+            int rID = resources.getIdentifier("com.example.groupsix.groupsixasmtone:raw/" + FILENAME, null, null);
+            //get the file as a stream
+            InputStream iS = resources.openRawResource(rID);
 
             //create a buffer that has the same size as the InputStream
             byte[] buffer = new byte[iS.available()];
