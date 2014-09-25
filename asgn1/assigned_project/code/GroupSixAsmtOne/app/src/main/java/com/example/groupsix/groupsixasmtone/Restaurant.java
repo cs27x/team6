@@ -130,8 +130,8 @@ public class Restaurant implements Serializable {
         Calendar now = getCurrentCalendar();
 
         int today = now.get(Calendar.DAY_OF_WEEK);
-        int openTime = openTimes[today];
-        int closeTime = closingTimes[today];
+        int openTime = getOpenTime(today);
+        int closeTime = getClosingTime(today);
 
         if (openTime >= 0 && closeTime >= 0) {
             int currentTime = now.get(Calendar.HOUR_OF_DAY) * 60 + now.get(Calendar.MINUTE);
@@ -150,8 +150,8 @@ public class Restaurant implements Serializable {
      */
     public boolean isOpen(int day, int time) {
 
-        int openTime = openTimes[day];
-        int closeTime = closingTimes[day];
+        int openTime = getOpenTime(day);
+        int closeTime = getClosingTime(day);
 
         // Check for 0 in array
         return openTime >= 0 && closeTime >= 0 && openTime <= time && time <= closeTime;
@@ -410,8 +410,8 @@ public class Restaurant implements Serializable {
         int[] times = new int[2];
 
         int today = now.get(Calendar.DAY_OF_WEEK);
-        times[0] = openTimes[today];
-        times[1] = closingTimes[today];
+        times[0] = getOpenTime(today);
+        times[1] = getClosingTime(today);
         return times;
     }
 
